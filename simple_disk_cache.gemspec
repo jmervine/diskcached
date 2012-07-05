@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Joshua Mervine"]
   s.email       = ["joshua@mervine.net"]
-  s.homepage    = "http://github.com/jmervine/simple_disk_cache"
+  s.homepage    = "http://jmervine.github.com/simple_disk_cache/"
   s.summary     = "Simple disk cache"
   s.description = "Simple disk cache for things like Sinatra"
  
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "simplecov"
   s.add_development_dependency "rdoc"
  
-  s.files        = Dir.glob("lib/**/*") + %w(README.txt)
+  s.files        = Dir.glob("lib/**/*") + %w(README.md Benchmark.md Gemfile Rakefile)
   s.require_path = 'lib'
 end
 

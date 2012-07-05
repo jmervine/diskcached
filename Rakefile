@@ -11,7 +11,7 @@ task :benchmark do
 end
 
 task :package do
-  puts %x{ gem build simple_disk_cache.gemspec && mv *.gem ./pkg/ }
+  puts %x{ gem build simple_disk_cache.gemspec && (mkdir ./pkg; mv *.gem ./pkg/ ) }
 end
 
 # vim: syntax=ruby
