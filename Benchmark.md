@@ -6,6 +6,7 @@
 to actaully work on ruby 1.8.7 at this point. I'm including the
 benchmarks for it as an academic excercise.
 
+=======
     ------------------------------------------------------------
      benchmarking 'foo' 100000 times using
        ruby 1.8.7 (2011-06-30 patchlevel 352) [x86_64-linux]
