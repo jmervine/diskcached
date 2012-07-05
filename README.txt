@@ -1,6 +1,6 @@
-= SimpleDiskCache
+# SimpleDiskCache
 
-== Installation
+## Installation
 
 gem install simple_disk_cache
 
