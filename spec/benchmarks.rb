@@ -9,7 +9,8 @@ read_cache.cache('read') { "foo" }
 
 times = 100000
 puts "-"*60
-puts " benchmarking 'foo' #{times} times"
+puts " benchmarking 'foo' #{times} times using"
+puts "   #{`ruby --version`.chomp}"
 puts "-"*60
 Benchmark.bm do |b|
   b.report('write') do
@@ -25,7 +26,8 @@ Benchmark.bm do |b|
 end
 puts " "
 puts "-"*60
-puts " benchmarking large hash #{times} times"
+puts " benchmarking large hash #{times} times using"
+puts "   #{`ruby --version`.chomp}"
 puts "-"*60
 
 large_hash = {}

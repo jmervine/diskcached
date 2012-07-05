@@ -1,7 +1,23 @@
+# @author Joshua P. Mervine <joshua@mervine.net>
+#
 class SimpleDiskCache
+  # version for Hoe and therefore gem
   VERSION = '1.0.0'
 
-  attr_reader :store, :timeout, :last_gc
+  # disk location for cache store
+  attr_reader :store
+  
+  # cache timeout
+  attr_reader :timeout
+ 
+  # time of last #garbage_collect_expired_caches
+  attr_reader :last_gc
+
+  # initialize object
+  # - set #store to passed or default ('/tmp/cache')
+  # - set #timeout to passed or default ('600')
+  # - set #last_gc to current time
+  # - run #ensure_store_directory
   def initialize store="/tmp/cache", timeout=600
     @store   = store
     @timeout = timeout
@@ -9,21 +25,28 @@ class SimpleDiskCache
     ensure_store_directory
   end
 
+  # return true if cache with 'key' is expired
   def expired? key
     mtime = read_cache_mtime(key)
     return (mtime.nil? || mtime+timeout <= Time.now)
   end
 
+  # expire cache with 'key'
   def expire! key
     File.delete( cache_file(key) ) if File.exists?( cache_file(key) )
   end
 
+  # expire (delete) all caches in #store directory
   def expire_all! 
     Dir[ File.join( store, '*.cache' ) ].each do |file|
       File.delete(file) 
     end
   end
 
+  # create and read cache with 'key'
+  # - run #garbage_collect_expired_caches 
+  # - creates cache if it doesn't exist
+  # - reads cache if it exists
   def cache key
     garbage_collect_expired_caches
     begin
@@ -38,12 +61,15 @@ class SimpleDiskCache
     end
   end
 
+  # returns path to cache file with 'key'
   def cache_file key
     File.join( store, key+".cache" )
   end
 
 
   private
+  # delete all expired caches every #timeout seconds
+  # on being called
   def garbage_collect_expired_caches
     if last_gc+timeout <= Time.now
       Dir[ File.join( store, "*.cache" ) ].each do |f| 
@@ -54,6 +80,7 @@ class SimpleDiskCache
     end
   end
 
+  # creates the actual cache file
   def write_cache_file key, content
     f = File.open( cache_file(key), "w+" )
     f.flock(File::LOCK_EX)
@@ -62,6 +89,7 @@ class SimpleDiskCache
     return content
   end
 
+  # reads the actual cache file
   def read_cache_file key
     f = File.open( cache_file(key), "r" )
     f.flock(File::LOCK_SH)
@@ -70,11 +98,14 @@ class SimpleDiskCache
     return out
   end
 
+  # returns mtime of cache file or nil if 
+  # file doesn't exist
   def read_cache_mtime key
     return nil unless File.exists?(cache_file(key))
     File.mtime( cache_file(key) )
   end
 
+  # creates #store directory if it doesn't exist
   def ensure_store_directory
     Dir.mkdir( store ) unless File.directory?( store )
   end

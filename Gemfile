@@ -6,6 +6,8 @@ end
 
 group :development do
   gem 'hoe'
+  gem 'dcov'
+  gem 'rdoc'
 end
 
 group :test do
