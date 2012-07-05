@@ -1,54 +1,89 @@
 #!/usr/bin/env ruby
 require 'benchmark'
+require 'memcached'
 require File.join(File.dirname(__FILE__), '..', 'lib', 'simple_disk_cache')
 
-write_cache = SimpleDiskCache.new('/tmp/benchmark',0)
-read_cache = SimpleDiskCache.new('/tmp/benchmark')
+# benchmarks helpers
 
-read_cache.cache('read') { "foo" }
-
-times = 100000
-puts "-"*60
-puts " benchmarking 'foo' #{times} times using"
-puts "   #{`ruby --version`.chomp}"
-puts "-"*60
-Benchmark.bm do |b|
-  b.report('write') do
-    (1..times).each do
-      write_cache.cache('write') { "foo" }
-    end
+def large_hash
+  hash = {}
+  (1..100).each do |i|
+    hash["key#{i}"] = "foo"*100
   end
-  b.report(' read') do
-    (1..times).each do
-      x = read_cache.cache('read') 
-    end
-  end
+  return hash
 end
-puts " "
-puts "-"*60
-puts " benchmarking large hash #{times} times using"
-puts "   #{`ruby --version`.chomp}"
-puts "-"*60
+# Set up data sets #
+LARGE_HASH = large_hash
+SMALL_STR  = "foo"
+TIMES      = 100000
 
-large_hash = {}
-(1..100).each do |i|
-  large_hash["key#{i}"] = "foo"*100
-end
+# print ruby version as header
+puts "## Ruby #{`ruby -v | awk '{print $2}'`.chomp}"
 
-write_cache.expire_all!
-read_cache.expire_all!
-read_cache.cache('read') { large_hash }
+  write_cache = SimpleDiskCache.new('/tmp/benchmark',0)
+  read_cache  = SimpleDiskCache.new('/tmp/benchmark')
+  memcache = Memcached.new('localhost:11211')
 
-Benchmark.bm do |b|
-  b.report('write') do
-    (1..times).each do
-      write_cache.cache('write') { large_hash }
+  puts " "
+  puts "#### small string * #{TIMES}"
+  dataset = SMALL_STR
+
+  read_cache.cache('read') { dataset }
+  memcache.set 'read', dataset
+
+  Benchmark.bm do |b|
+    b.report('s_d_cache set') do
+      (1..TIMES).each do
+        write_cache.cache('write') { dataset }
+      end
+    end
+    b.report('memcached set') do
+      (1..TIMES).each do
+        memcache.set 'write', dataset
+      end
+    end
+    b.report('s_d_cache get') do
+      (1..TIMES).each do
+        x = read_cache.cache('read') 
+      end
+    end
+    b.report('memcached get') do
+      (1..TIMES).each do
+        memcache.get 'read'
+      end
     end
   end
-  b.report(' read') do
-    (1..times).each do
-      x = read_cache.cache('read') 
+
+  write_cache.expire_all!
+  read_cache.expire_all!
+
+  puts " "
+  puts " "
+  puts "#### large hash * #{TIMES}"
+  dataset = LARGE_HASH
+
+  read_cache.cache('read') { dataset }
+  memcache.set 'read', dataset
+  Benchmark.bm do |b|
+    b.report('s_d_cache set') do
+      (1..TIMES).each do
+        write_cache.cache('write') { dataset }
+      end
+    end
+    b.report('memcached set') do
+      (1..TIMES).each do
+        memcache.set 'write', dataset
+      end
+    end
+    b.report('s_d_cache get') do
+      (1..TIMES).each do
+        x = read_cache.cache('read') 
+      end
+    end
+    b.report('memcached get') do
+      (1..TIMES).each do
+        memcache.get 'read'
+      end
     end
   end
-end
-puts "-"*60
+
