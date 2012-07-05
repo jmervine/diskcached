@@ -1,3 +1,7 @@
+require 'simplecov'
+SimpleCov.start do
+    add_filter "/vendor/"
+end
 require 'rspec'
 require 'fileutils'
 require './lib/simple_disk_cache.rb'
