@@ -1,5 +1,29 @@
 # Benchmarks
 
+### ruby 1.8.7
+
+**Warning:** Tests do not pass and therefore this isn't expected 
+to actaully work on ruby 1.8.7 at this point. I'm including the
+benchmarks for it as an academic excercise.
+
+    ------------------------------------------------------------
+     benchmarking 'foo' 100000 times using
+       ruby 1.8.7 (2011-06-30 patchlevel 352) [x86_64-linux]
+    ------------------------------------------------------------
+          user     system      total        real
+    write  3.480000   2.460000   5.940000 (  5.978325)
+     read  2.820000   0.100000   2.920000 (  2.936619)
+     
+    ------------------------------------------------------------
+     benchmarking large hash 100000 times using
+       ruby 1.8.7 (2011-06-30 patchlevel 352) [x86_64-linux]
+    ------------------------------------------------------------
+          user     system      total        real
+    write 16.120000   4.260000  20.380000 ( 20.491624)
+     read  2.830000   0.050000   2.880000 (  2.900187)
+    ------------------------------------------------------------
+
+
 ### ruby 1.9.2
     
     ------------------------------------------------------------
