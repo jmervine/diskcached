@@ -10,7 +10,7 @@ require 'hoe'
 # Hoe.plugin :rcov
 # Hoe.plugin :rubyforge
 
-Hoe.spec 'disk_cache' do
+Hoe.spec 'simple_disk_cache' do
   # HEY! If you fill these out in ~/.hoe_template/Rakefile.erb then
   # you'll never have to touch them again!
   # (delete this comment too, of course)
