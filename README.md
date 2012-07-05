@@ -12,9 +12,7 @@
 
 #### History
 
-#### 1.0.0 / 2012-07-03
-
-* Birth
+* 1.0.0 / 2012-07-03
   * Pre-release version, widely untested outside of the actual tests.
 
 
