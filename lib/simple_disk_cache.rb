@@ -1,4 +1,4 @@
-class DiskCache
+class SimpleDiskCache
   VERSION = '1.0.0'
 
   attr_reader :store, :timeout, :last_gc

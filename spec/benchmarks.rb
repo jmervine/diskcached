@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 require 'benchmark'
-require File.join(File.dirname(__FILE__), '..', 'lib', 'disk_cache')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'simple_disk_cache')
 
-write_cache = DiskCache.new('/tmp/benchmark',0)
-read_cache = DiskCache.new('/tmp/benchmark')
+write_cache = SimpleDiskCache.new('/tmp/benchmark',0)
+read_cache = SimpleDiskCache.new('/tmp/benchmark')
 
 read_cache.cache('read') { "foo" }
 

@@ -1,6 +1,6 @@
 require 'rspec'
 require 'fileutils'
-require './lib/disk_cache.rb'
+require './lib/simple_disk_cache.rb'
 
 # create things to cache and test
 class TestObject

@@ -1,17 +1,17 @@
 require 'spec_helper.rb'
 
 
-describe DiskCache do
+describe SimpleDiskCache do
   describe '#new' do
     it "should init" do
-      expect { @cache = DiskCache.new }.should_not raise_error
+      expect { @cache = SimpleDiskCache.new }.should_not raise_error
     end
     it "should init with 'store'" do
-      expect { @cache = DiskCache.new('/tmp/rspec/cache') }.should_not raise_error
+      expect { @cache = SimpleDiskCache.new('/tmp/rspec/cache') }.should_not raise_error
       @cache.store.should eq '/tmp/rspec/cache'
     end
     it "should init with 'store' and 'timeout'" do
-      expect { @cache = DiskCache.new('/tmp/rspec/cache', 10) }.should_not raise_error
+      expect { @cache = SimpleDiskCache.new('/tmp/rspec/cache', 10) }.should_not raise_error
       @cache.timeout.should eq 10
     end
     it "should create cache dir if it doesn't exist" do
@@ -21,7 +21,7 @@ describe DiskCache do
 
   describe "#cache" do
     before(:all) do
-      @cache = DiskCache.new("/tmp/rspec/cache", 0.5)
+      @cache = SimpleDiskCache.new("/tmp/rspec/cache", 0.5)
     end
     it "should create a new cache" do
       @cache.cache('test1') do
@@ -50,7 +50,7 @@ describe DiskCache do
 
   describe "#expired?" do
     before(:all) do
-      @cache = DiskCache.new("/tmp/rspec/cache", 0.1)
+      @cache = SimpleDiskCache.new("/tmp/rspec/cache", 0.1)
       @cache.cache('test2') { "cache test2" }
     end
     it "should be false" do
@@ -64,7 +64,7 @@ describe DiskCache do
   
   describe "#expire!" do
     before(:all) do
-      @cache = DiskCache.new("/tmp/rspec/cache")
+      @cache = SimpleDiskCache.new("/tmp/rspec/cache")
       @cache.cache('test3') { "cache test3" }
     end
     it "should expire cache" do
@@ -79,7 +79,7 @@ describe DiskCache do
 
   describe "#expire_all!" do
     before(:all) do
-      @cache = DiskCache.new("/tmp/rspec/cache")
+      @cache = SimpleDiskCache.new("/tmp/rspec/cache")
       @cache.cache('test4') { "cache test4" }
       @cache.cache('test5') { "cache test5" }
       @cache.cache('test6') { "cache test6" }
@@ -100,7 +100,7 @@ describe DiskCache do
 
   describe "#cache_file" do
     before(:all) do
-      @cache = DiskCache.new("/tmp/rspec/cache")
+      @cache = SimpleDiskCache.new("/tmp/rspec/cache")
     end
     it "should build cache path" do
       @cache.cache_file("test7").should eq "/tmp/rspec/cache/test7.cache"
@@ -109,7 +109,7 @@ describe DiskCache do
 
   describe "garbage collection" do
     before(:all) do
-      @cache = DiskCache.new("/tmp/rspec/cache", 0.5)
+      @cache = SimpleDiskCache.new("/tmp/rspec/cache", 0.5)
       @cache.cache('test8') { "cache test8" }
       @cache.cache('test9') { "cache test9" }
       @cache.cache('test10') { "cache test10" }
@@ -124,9 +124,9 @@ describe DiskCache do
   end
 end
 
-describe DiskCache, "advanced test cases" do
+describe SimpleDiskCache, "advanced test cases" do
   before(:all) do
-    @cache = DiskCache.new('/tmp/rspec/cache')
+    @cache = SimpleDiskCache.new('/tmp/rspec/cache')
     @testo = TestObject.new
   end
 
