@@ -12,8 +12,6 @@ it holds up will and even should provide slightly faster reads.
 **Warning:** Tests do not pass and therefore this isn't expected 
 to actaully work on ruby 1.8.7 at this point. I'm including the
 benchmarks for it as an academic excercise.
-
-## Ruby 1.8.7
  
 #### small string * 100000
 
