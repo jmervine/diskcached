@@ -127,8 +127,6 @@
     
 <p>@author Joshua P. Mervine &lt;joshua@mervine.net&gt;</p>
 
-<p>TODO: implement ‘get’ and ‘set’ to look more like  memcached</p>
-
   </div><!-- description -->
 
   
@@ -147,7 +145,7 @@
       
         <dt id="VERSION">VERSION
         
-        <dd class="description"><p>version for Hoe and therefore gem</p>
+        <dd class="description"><p>version for gem</p>
         
       
       </dl>
@@ -236,7 +234,7 @@ time</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 23</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">store</span>=<span class="ruby-string">&quot;/tmp/cache&quot;</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-value">600</span>
   <span class="ruby-ivar">@store</span>   = <span class="ruby-identifier">store</span>
   <span class="ruby-ivar">@timeout</span> = <span class="ruby-identifier">timeout</span>
@@ -309,7 +307,7 @@ time</p>
 
           
           <div class="method-source-code" id="cache-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 54</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">garbage_collect_expired_caches</span>
   <span class="ruby-keyword">begin</span>
@@ -353,7 +351,7 @@ time</p>
 
           
           <div class="method-source-code" id="cache_file-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 110</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache_file</span> <span class="ruby-identifier">key</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.cache&quot;</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -410,7 +408,7 @@ time</p>
 
           
           <div class="method-source-code" id="expire-21-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 37</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expire!</span> <span class="ruby-identifier">key</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-identifier">cache_file</span>(<span class="ruby-identifier">key</span>) ) <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-identifier">cache_file</span>(<span class="ruby-identifier">key</span>) )
 <span class="ruby-keyword">end</span></pre>
@@ -445,7 +443,7 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
 
           
           <div class="method-source-code" id="expire_all-21-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expire_all!</span> 
   <span class="ruby-constant">Dir</span>[ <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-string">'*.cache'</span> ) ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">file</span>) 
@@ -481,7 +479,7 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
 
           
           <div class="method-source-code" id="expired-3F-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 31</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expired?</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">mtime</span> = <span class="ruby-identifier">read_cache_mtime</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">return</span> (<span class="ruby-identifier">mtime</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">mtime</span><span class="ruby-operator">+</span><span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
@@ -545,7 +543,7 @@ raises Diskcache::NotFound if none are available</p>
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 91</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span> <span class="ruby-identifier">key</span>
   <span class="ruby-identifier">garbage_collect_expired_caches</span>
   <span class="ruby-keyword">begin</span>
@@ -621,7 +619,7 @@ raises Diskcache::NotFound if none are available</p>
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-identifier">garbage_collect_expired_caches</span>
   <span class="ruby-keyword">begin</span>
