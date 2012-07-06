@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'>
   <head>
-    <title>Code coverage for Simple disk cache</title>
+    <title>Code coverage for Diskcached</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.5.3/jquery-1.6.2.min.js' type='text/javascript'></script>
     <script src='./assets/0.5.3/jquery.dataTables.min.js' type='text/javascript'></script>   
@@ -23,27 +23,27 @@
       <img src="./assets/0.5.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2012-07-05T18:03:15-07:00">2012-07-05T18:03:15-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2012-07-06T01:25:23-07:00">2012-07-06T01:25:23-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">100.0%</span></span>
+    (<span class="covered_percent"><span class="green">98.7%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         15.6
+         20.4
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>1</b> files in total.
-    <b>53</b> relevant lines. 
-    <span class="green"><b>53</b> lines covered</span> and
-    <span class="red"><b>0</b> lines missed </span>
+    <b>77</b> relevant lines. 
+    <span class="green"><b>76</b> lines covered</span> and
+    <span class="red"><b>1</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -60,13 +60,13 @@
     <tbody>
       
       <tr>
-        <td class="strong"><a href="#c833ed097324db74dbb6379b21b207fa9deff9be" class="src_link" title="lib/diskcached.rb">lib/diskcached.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>113</td>
-        <td>53</td>
-        <td>53</td>
-        <td>0</td>
-        <td>15.6</td>
+        <td class="strong"><a href="#c3a14fa2460ae87095fe5bb11aaa0cb72509d1a4" class="src_link" title="lib/diskcached.rb">lib/diskcached.rb</a></td>
+        <td class="green strong">98.7 %</td>
+        <td>161</td>
+        <td>77</td>
+        <td>76</td>
+        <td>1</td>
+        <td>20.4</td>
       </tr>
       
     </tbody>
@@ -85,14 +85,14 @@
     
       <div class="source_files">
       
-        <div class="source_table" id="c833ed097324db74dbb6379b21b207fa9deff9be">
+        <div class="source_table" id="c3a14fa2460ae87095fe5bb11aaa0cb72509d1a4">
   <div class="header">
     <h3>lib/diskcached.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="green">98.7 %</span> covered</h4>
     <div>
-      <b>53</b> relevant lines. 
-      <span class="green"><b>53</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>77</b> relevant lines. 
+      <span class="green"><b>76</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
   
@@ -108,403 +108,403 @@
         <li class="never" data-hits="" data-linenumber="2">
           
           
-          <code class="ruby">#</code>
+          <code class="ruby"># </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="3">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="3">
           
-          <code class="ruby">class Diskcached</code>
+          
+          <code class="ruby"># TODO: implement 'get' and 'set' to look more like </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="4">
           
           
-          <code class="ruby">  # version for Hoe and therefore gem</code>
+          <code class="ruby"># memcached</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="5">
           <span class="hits">1</span>
           
-          <code class="ruby">  VERSION = '1.0.0'</code>
+          <code class="ruby">class Diskcached</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="6">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  # version for Hoe and therefore gem</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="7">
-          
-          
-          <code class="ruby">  # disk location for cache store</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="8">
+        <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">  attr_reader :store</code>
+          <code class="ruby">  VERSION = '1.0.0'</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="9">
           
           
-          <code class="ruby">  </code>
+          <code class="ruby">  # disk location for cache store</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="10">
-          
-          
-          <code class="ruby">  # cache timeout</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="11">
+        <li class="covered" data-hits="1" data-linenumber="10">
           <span class="hits">1</span>
           
-          <code class="ruby">  attr_reader :timeout</code>
+          <code class="ruby">  attr_reader :store</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">  </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="12">
           
           
-          <code class="ruby"> </code>
+          <code class="ruby">  # cache timeout</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="13">
-          
-          
-          <code class="ruby">  # time of last #garbage_collect_expired_caches</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="14">
+        <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
-          <code class="ruby">  attr_reader :last_gc</code>
+          <code class="ruby">  attr_reader :timeout</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby"> </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="15">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  # time of last #garbage_collect_expired_caches</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  # initialize object</code>
+          <code class="ruby">  attr_reader :last_gc</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="17">
           
           
-          <code class="ruby">  # - set #store to passed or default ('/tmp/cache')</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="18">
           
           
-          <code class="ruby">  # - set #timeout to passed or default ('600')</code>
+          <code class="ruby">  # initialize object</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby">  # - set #last_gc to current time</code>
+          <code class="ruby">  # - set #store to passed or default ('/tmp/cache')</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="20">
           
           
+          <code class="ruby">  # - set #timeout to passed or default ('600')</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby">  # - set #last_gc to current time</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
           <code class="ruby">  # - run #ensure_store_directory</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="23">
           <span class="hits">1</span>
           
           <code class="ruby">  def initialize store=&quot;/tmp/cache&quot;, timeout=600</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="22">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="13" data-linenumber="24">
+          <span class="hits">13</span>
           
           <code class="ruby">    @store   = store</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="23">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="13" data-linenumber="25">
+          <span class="hits">13</span>
           
           <code class="ruby">    @timeout = timeout</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="24">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="13" data-linenumber="26">
+          <span class="hits">13</span>
           
           <code class="ruby">    @last_gc = Time.now</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="25">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="13" data-linenumber="27">
+          <span class="hits">13</span>
           
           <code class="ruby">    ensure_store_directory</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="26">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="27">
-          
-          
-          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="28">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="29">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
           <code class="ruby">  # return true if cache with 'key' is expired</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="29">
+        <li class="covered" data-hits="1" data-linenumber="31">
           <span class="hits">1</span>
           
           <code class="ruby">  def expired? key</code>
         </li>
       
-        <li class="covered" data-hits="47" data-linenumber="30">
-          <span class="hits">47</span>
+        <li class="covered" data-hits="86" data-linenumber="32">
+          <span class="hits">86</span>
           
           <code class="ruby">    mtime = read_cache_mtime(key)</code>
         </li>
       
-        <li class="covered" data-hits="47" data-linenumber="31">
-          <span class="hits">47</span>
+        <li class="covered" data-hits="86" data-linenumber="33">
+          <span class="hits">86</span>
           
           <code class="ruby">    return (mtime.nil? || mtime+timeout &lt;= Time.now)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="32">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="33">
-          
-          
-          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="34">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="35">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
           <code class="ruby">  # expire cache with 'key'</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
+        <li class="covered" data-hits="1" data-linenumber="37">
           <span class="hits">1</span>
           
           <code class="ruby">  def expire! key</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="36">
+        <li class="covered" data-hits="3" data-linenumber="38">
           <span class="hits">3</span>
           
           <code class="ruby">    File.delete( cache_file(key) ) if File.exists?( cache_file(key) )</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="38">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="39">
           
           
-          <code class="ruby">  # expire (delete) all caches in #store directory</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
+          <code class="ruby">  alias :delete :expire!</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby">  # expire (delete) all caches in #store directory</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
+          
           <code class="ruby">  def expire_all! </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="41">
+        <li class="covered" data-hits="1" data-linenumber="44">
           <span class="hits">1</span>
           
           <code class="ruby">    Dir[ File.join( store, '*.cache' ) ].each do |file|</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="42">
+        <li class="covered" data-hits="4" data-linenumber="45">
           <span class="hits">4</span>
           
           <code class="ruby">      File.delete(file) </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="44">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="45">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby">  # create and read cache with 'key'</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby">  # - run #garbage_collect_expired_caches </code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  # - creates cache if it doesn't exist</code>
+          <code class="ruby">  alias :flush :expire_all!</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="49">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">  # create and read cache with 'key'</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">  # - run #garbage_collect_expired_caches </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby">  # - creates cache if it doesn't exist</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="53">
+          
+          
           <code class="ruby">  # - reads cache if it exists</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="50">
+        <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
           <code class="ruby">  def cache key</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="51">
+        <li class="covered" data-hits="37" data-linenumber="55">
           <span class="hits">37</span>
           
           <code class="ruby">    garbage_collect_expired_caches</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="52">
+        <li class="covered" data-hits="37" data-linenumber="56">
           <span class="hits">37</span>
           
           <code class="ruby">    begin</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="53">
+        <li class="covered" data-hits="37" data-linenumber="57">
           <span class="hits">37</span>
           
           <code class="ruby">      if expired?(key)</code>
         </li>
       
-        <li class="covered" data-hits="38" data-linenumber="54">
+        <li class="covered" data-hits="38" data-linenumber="58">
           <span class="hits">38</span>
           
           <code class="ruby">        content = Proc.new { yield }.call</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="55">
+        <li class="covered" data-hits="18" data-linenumber="59">
           <span class="hits">18</span>
           
-          <code class="ruby">        write_cache_file( key, Marshal::dump(content) )  </code>
+          <code class="ruby">        set( key, content )</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="36" data-linenumber="57">
+        <li class="covered" data-hits="36" data-linenumber="61">
           <span class="hits">36</span>
           
-          <code class="ruby">      content ||= Marshal::load(read_cache_file(key))</code>
+          <code class="ruby">      content ||= get( key )</code>
         </li>
       
-        <li class="covered" data-hits="36" data-linenumber="58">
+        <li class="covered" data-hits="36" data-linenumber="62">
           <span class="hits">36</span>
           
           <code class="ruby">      return content</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="59">
+        <li class="covered" data-hits="1" data-linenumber="63">
           <span class="hits">1</span>
           
           <code class="ruby">    rescue LocalJumpError</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="60">
+        <li class="covered" data-hits="1" data-linenumber="64">
           <span class="hits">1</span>
           
           <code class="ruby">      return nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="never" data-hits="" data-linenumber="65">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="62">
+        <li class="never" data-hits="" data-linenumber="66">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="64">
-          
-          
-          <code class="ruby">  # returns path to cache file with 'key'</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="65">
+        <li class="covered" data-hits="1" data-linenumber="67">
           <span class="hits">1</span>
           
-          <code class="ruby">  def cache_file key</code>
+          <code class="ruby">  alias :set_or_get :cache</code>
         </li>
       
-        <li class="covered" data-hits="117" data-linenumber="66">
-          <span class="hits">117</span>
+        <li class="covered" data-hits="1" data-linenumber="68">
+          <span class="hits">1</span>
           
-          <code class="ruby">    File.join( store, key+&quot;.cache&quot; )</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="67">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="68">
-          
-          
-          <code class="ruby"></code>
+          <code class="ruby">  alias :sog :cache</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="69">
@@ -513,64 +513,64 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="70">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="70">
           
-          <code class="ruby">  private</code>
+          
+          <code class="ruby">  # set cache with 'key'</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="71">
           
           
-          <code class="ruby">  # delete all expired caches every #timeout seconds</code>
+          <code class="ruby">  # - run #garbage_collect_expired_caches </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="72">
           
           
-          <code class="ruby">  # on being called</code>
+          <code class="ruby">  # - creates cache if it doesn't exist</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="73">
           <span class="hits">1</span>
           
-          <code class="ruby">  def garbage_collect_expired_caches</code>
+          <code class="ruby">  def set key, value</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="74">
-          <span class="hits">37</span>
+        <li class="covered" data-hits="26" data-linenumber="74">
+          <span class="hits">26</span>
           
-          <code class="ruby">    if last_gc+timeout &lt;= Time.now</code>
+          <code class="ruby">    garbage_collect_expired_caches</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="75">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="26" data-linenumber="75">
+          <span class="hits">26</span>
           
-          <code class="ruby">      Dir[ File.join( store, &quot;*.cache&quot; ) ].each do |f| </code>
+          <code class="ruby">    begin</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="76">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="26" data-linenumber="76">
+          <span class="hits">26</span>
           
-          <code class="ruby">        if (File.mtime(f)+timeout) &lt;= Time.now</code>
+          <code class="ruby">      write_cache_file( key, Marshal::dump(value) )</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="77">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="26" data-linenumber="77">
+          <span class="hits">26</span>
           
-          <code class="ruby">          File.delete(f) </code>
+          <code class="ruby">      return true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="78">
           
           
-          <code class="ruby">        end</code>
+          <code class="ruby">    rescue</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="79">
+        <li class="missed" data-hits="0" data-linenumber="79">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">      return false</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="80">
@@ -585,193 +585,481 @@
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="covered" data-hits="1" data-linenumber="82">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  alias :add :set</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="83">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  alias :replace :set</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="83">
+        <li class="never" data-hits="" data-linenumber="85">
           
           
-          <code class="ruby">  # creates the actual cache file</code>
+          <code class="ruby">  # get cache with 'key'</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="84">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="86">
           
-          <code class="ruby">  def write_cache_file key, content</code>
+          
+          <code class="ruby">  # - reads cache if it exists and isn't expired </code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="85">
-          <span class="hits">18</span>
+        <li class="never" data-hits="" data-linenumber="87">
           
-          <code class="ruby">    f = File.open( cache_file(key), &quot;w+&quot; )</code>
+          
+          <code class="ruby">  #   or raises Diskcache::NotFound</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="86">
-          <span class="hits">18</span>
+        <li class="never" data-hits="" data-linenumber="88">
           
-          <code class="ruby">    f.flock(File::LOCK_EX)</code>
+          
+          <code class="ruby">  # - if 'key' is an Array returns only keys </code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="87">
-          <span class="hits">18</span>
+        <li class="never" data-hits="" data-linenumber="89">
           
-          <code class="ruby">    f.write( content )</code>
-        </li>
-      
-        <li class="covered" data-hits="18" data-linenumber="88">
-          <span class="hits">18</span>
           
-          <code class="ruby">    f.close</code>
-        </li>
-      
-        <li class="covered" data-hits="18" data-linenumber="89">
-          <span class="hits">18</span>
-          
-          <code class="ruby">    return content</code>
+          <code class="ruby">  #   which exist and aren't expired, it raises</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="90">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">  #   Diskcache::NotFound if none are available</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="92">
-          
-          
-          <code class="ruby">  # reads the actual cache file</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="91">
           <span class="hits">1</span>
           
-          <code class="ruby">  def read_cache_file key</code>
+          <code class="ruby">  def get key</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="94">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="35" data-linenumber="92">
+          <span class="hits">35</span>
           
-          <code class="ruby">    f = File.open( cache_file(key), &quot;r&quot; )</code>
+          <code class="ruby">    garbage_collect_expired_caches</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="95">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="35" data-linenumber="93">
+          <span class="hits">35</span>
           
-          <code class="ruby">    f.flock(File::LOCK_SH)</code>
+          <code class="ruby">    begin</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="96">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="35" data-linenumber="94">
+          <span class="hits">35</span>
           
-          <code class="ruby">    out = f.read </code>
+          <code class="ruby">      if key.is_a? Array</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="97">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="4" data-linenumber="95">
+          <span class="hits">4</span>
           
-          <code class="ruby">    f.close</code>
+          <code class="ruby">        hash = {}</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="98">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="4" data-linenumber="96">
+          <span class="hits">4</span>
           
-          <code class="ruby">    return out</code>
+          <code class="ruby">        key.each do |k|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="covered" data-hits="8" data-linenumber="97">
+          <span class="hits">8</span>
+          
+          <code class="ruby">          hash[k] = Marshal::load(read_cache_file(k)) unless expired?(k)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">        end</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="99">
+          <span class="hits">4</span>
+          
+          <code class="ruby">        return hash unless hash.empty?</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="100">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="covered" data-hits="31" data-linenumber="101">
+          <span class="hits">31</span>
           
-          
-          <code class="ruby">  # returns mtime of cache file or nil if </code>
+          <code class="ruby">        return Marshal::load(read_cache_file(key)) unless expired?(key)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="102">
           
           
-          <code class="ruby">  # file doesn't exist</code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="103">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="103">
+          <span class="hits">2</span>
           
-          <code class="ruby">  def read_cache_mtime key</code>
+          <code class="ruby">      raise Diskcached::NotFound</code>
         </li>
       
-        <li class="covered" data-hits="47" data-linenumber="104">
-          <span class="hits">47</span>
+        <li class="never" data-hits="" data-linenumber="104">
           
-          <code class="ruby">    return nil unless File.exists?(cache_file(key))</code>
+          
+          <code class="ruby">    rescue</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="105">
-          <span class="hits">24</span>
+        <li class="covered" data-hits="2" data-linenumber="105">
+          <span class="hits">2</span>
           
-          <code class="ruby">    File.mtime( cache_file(key) )</code>
+          <code class="ruby">      raise Diskcached::NotFound</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="106">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="108">
           
           
-          <code class="ruby">  # creates #store directory if it doesn't exist</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="109">
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby">  # returns path to cache file with 'key'</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="110">
           <span class="hits">1</span>
           
-          <code class="ruby">  def ensure_store_directory</code>
+          <code class="ruby">  def cache_file key</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="110">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="218" data-linenumber="111">
+          <span class="hits">218</span>
           
-          <code class="ruby">    Dir.mkdir( store ) unless File.directory?( store )</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="111">
-          
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    File.join( store, key+&quot;.cache&quot; )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="112">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="113">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="114">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="115">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby">  # delete all expired caches every #timeout seconds</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="117">
+          
+          
+          <code class="ruby">  # on being called</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def garbage_collect_expired_caches</code>
+        </li>
+      
+        <li class="covered" data-hits="98" data-linenumber="119">
+          <span class="hits">98</span>
+          
+          <code class="ruby">    if last_gc+timeout &lt;= Time.now</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="120">
+          <span class="hits">7</span>
+          
+          <code class="ruby">      Dir[ File.join( store, &quot;*.cache&quot; ) ].each do |f| </code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="121">
+          <span class="hits">8</span>
+          
+          <code class="ruby">        if (File.mtime(f)+timeout) &lt;= Time.now</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="122">
+          <span class="hits">8</span>
+          
+          <code class="ruby">          File.delete(f) </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby">        end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="124">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="127">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="128">
+          
+          
+          <code class="ruby">  # creates the actual cache file</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="129">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def write_cache_file key, content</code>
+        </li>
+      
+        <li class="covered" data-hits="26" data-linenumber="130">
+          <span class="hits">26</span>
+          
+          <code class="ruby">    f = File.open( cache_file(key), &quot;w+&quot; )</code>
+        </li>
+      
+        <li class="covered" data-hits="26" data-linenumber="131">
+          <span class="hits">26</span>
+          
+          <code class="ruby">    f.flock(File::LOCK_EX)</code>
+        </li>
+      
+        <li class="covered" data-hits="26" data-linenumber="132">
+          <span class="hits">26</span>
+          
+          <code class="ruby">    f.write( content )</code>
+        </li>
+      
+        <li class="covered" data-hits="26" data-linenumber="133">
+          <span class="hits">26</span>
+          
+          <code class="ruby">    f.close</code>
+        </li>
+      
+        <li class="covered" data-hits="26" data-linenumber="134">
+          <span class="hits">26</span>
+          
+          <code class="ruby">    return content</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="135">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="136">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="137">
+          
+          
+          <code class="ruby">  # reads the actual cache file</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="138">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def read_cache_file key</code>
+        </li>
+      
+        <li class="covered" data-hits="36" data-linenumber="139">
+          <span class="hits">36</span>
+          
+          <code class="ruby">    f = File.open( cache_file(key), &quot;r&quot; )</code>
+        </li>
+      
+        <li class="covered" data-hits="36" data-linenumber="140">
+          <span class="hits">36</span>
+          
+          <code class="ruby">    f.flock(File::LOCK_SH)</code>
+        </li>
+      
+        <li class="covered" data-hits="36" data-linenumber="141">
+          <span class="hits">36</span>
+          
+          <code class="ruby">    out = f.read </code>
+        </li>
+      
+        <li class="covered" data-hits="36" data-linenumber="142">
+          <span class="hits">36</span>
+          
+          <code class="ruby">    f.close</code>
+        </li>
+      
+        <li class="covered" data-hits="36" data-linenumber="143">
+          <span class="hits">36</span>
+          
+          <code class="ruby">    return out</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="144">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="145">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="146">
+          
+          
+          <code class="ruby">  # returns mtime of cache file or nil if </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="147">
+          
+          
+          <code class="ruby">  # file doesn't exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="148">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def read_cache_mtime key</code>
+        </li>
+      
+        <li class="covered" data-hits="86" data-linenumber="149">
+          <span class="hits">86</span>
+          
+          <code class="ruby">    return nil unless File.exists?(cache_file(key))</code>
+        </li>
+      
+        <li class="covered" data-hits="60" data-linenumber="150">
+          <span class="hits">60</span>
+          
+          <code class="ruby">    File.mtime( cache_file(key) )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="151">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="152">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="153">
+          
+          
+          <code class="ruby">  # creates #store directory if it doesn't exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="154">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def ensure_store_directory</code>
+        </li>
+      
+        <li class="covered" data-hits="13" data-linenumber="155">
+          <span class="hits">13</span>
+          
+          <code class="ruby">    Dir.mkdir( store ) unless File.directory?( store )</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="156">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="157">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="158">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  class NotFound &lt; Exception</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="159">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="160">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="161">
           
           
           <code class="ruby">end</code>

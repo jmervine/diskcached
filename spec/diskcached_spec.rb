@@ -19,7 +19,50 @@ describe Diskcached do
     end
   end
 
-  describe "#cache" do
+  describe "#set", "(alias #add)" do
+    before(:all) do
+      @cache = Diskcached.new("/tmp/rspec/cache")
+    end
+    it "should create a new cache" do
+      @cache.set('test1', "test string").should be_true
+    end
+    it "should create a file on disk" do
+      File.exists?("/tmp/rspec/cache/test1.cache").should be_true
+    end
+  end
+
+  describe "#get", "single" do
+    before(:all) do
+      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+    end
+    it "should read cache before expiration" do
+      @cache.get('test1').should eq "test string"
+      @cache.get('test1').should be_a_kind_of String
+    end
+    it "should expire correctly" do
+      sleep 0.51
+      expect { @cache.get('test1') }.should raise_error /Diskcached::NotFound/
+    end
+  end
+
+  describe "#get", "multiple" do
+    before(:all) do
+      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache.set('test1', "test string")
+      @cache.set('test2', "test string")
+    end
+    it "should read multiple caches into a Hash" do
+      @cache.get(['test1', 'test2']).should be_a_kind_of Hash
+      @cache.get(['test1', 'test2']).keys.count.should eq 2
+      @cache.get(['test1', 'test2'])['test1'].should eq "test string"
+    end
+    it "should expire correctly" do
+      sleep 0.51
+      expect { @cache.get(['test1', 'test2']) }.should raise_error /Diskcached::NotFound/
+    end
+  end
+
+  describe "#cache", "(alias #set_or_get #sog)" do
     before(:all) do
       @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
     end
@@ -62,7 +105,7 @@ describe Diskcached do
     end
   end
   
-  describe "#expire!" do
+  describe "#expire!", "(alias #delete)" do
     before(:all) do
       @cache = Diskcached.new("/tmp/rspec/cache")
       @cache.cache('test3') { "cache test3" }
@@ -77,7 +120,7 @@ describe Diskcached do
     end
   end
 
-  describe "#expire_all!" do
+  describe "#expire_all!", "(alias #flush)" do
     before(:all) do
       @cache = Diskcached.new("/tmp/rspec/cache")
       @cache.cache('test4') { "cache test4" }
@@ -122,6 +165,7 @@ describe Diskcached do
       File.exists?(@cache.cache_file('test10')).should be_true
     end
   end
+
 end
 
 describe Diskcached, "advanced test cases" do
@@ -134,30 +178,50 @@ describe Diskcached, "advanced test cases" do
     @cache.cache('array') { @testo.array }
     @cache.cache('array').should be_a_kind_of Array
     @cache.cache('array').count.should eq 3
+
+    @cache.set('array1', @testo.array)
+    @cache.get('array1').should be_a_kind_of Array
+    @cache.get('array1').count.should eq 3
   end
 
   it "should cache string" do
     @cache.cache('string') { @testo.string }
     @cache.cache('string').should be_a_kind_of String
     @cache.cache('string').should eq "foo bar bah"
+
+    @cache.set('string1', @testo.string)
+    @cache.get('string1').should be_a_kind_of String
+    @cache.get('string1').should eq "foo bar bah"
   end
 
   it "should cache number" do
     @cache.cache('num') { @testo.num }
     @cache.cache('num').should be_a_kind_of Integer
     @cache.cache('num').should eq 3
+
+    @cache.set('num1', @testo.num)
+    @cache.get('num1').should be_a_kind_of Integer
+    @cache.get('num1').should eq 3
   end
 
   it "should cache hash" do
     @cache.cache('hash') { @testo.hash }
     @cache.cache('hash').should be_a_kind_of Hash
     @cache.cache('hash').should have_key :foo
+
+    @cache.set('hash1', @testo.hash)
+    @cache.get('hash1').should be_a_kind_of Hash
+    @cache.get('hash1').should have_key :foo
   end
 
   it "should cache simple objects" do
     @cache.cache('object') { @testo.obj }
     @cache.cache('object').should be_a_kind_of TestSubObject
     @cache.cache('object').sub_foo.should eq "foo"
+
+    @cache.set('object1', @testo.obj)
+    @cache.get('object1').should be_a_kind_of TestSubObject
+    @cache.get('object1').sub_foo.should eq "foo"
   end
   it "should cache modified objects" do
     @cache.expire!('object')

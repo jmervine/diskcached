@@ -1,10 +1,8 @@
 # @author Joshua P. Mervine <joshua@mervine.net>
 # 
-# TODO: implement 'get' and 'set' to look more like 
-# memcached
 class Diskcached
-  # version for Hoe and therefore gem
-  VERSION = '1.0.0'
+  # version for gem
+  VERSION = '1.0.1'
 
   # disk location for cache store
   attr_reader :store
@@ -37,6 +35,7 @@ class Diskcached
   def expire! key
     File.delete( cache_file(key) ) if File.exists?( cache_file(key) )
   end
+  alias :delete :expire!
 
   # expire (delete) all caches in #store directory
   def expire_all! 
@@ -44,6 +43,7 @@ class Diskcached
       File.delete(file) 
     end
   end
+  alias :flush :expire_all!
 
   # create and read cache with 'key'
   # - run #garbage_collect_expired_caches 
@@ -54,12 +54,53 @@ class Diskcached
     begin
       if expired?(key)
         content = Proc.new { yield }.call
-        write_cache_file( key, Marshal::dump(content) )  
+        set( key, content )
       end
-      content ||= Marshal::load(read_cache_file(key))
+      content ||= get( key )
       return content
     rescue LocalJumpError
       return nil
+    end
+  end
+  alias :set_or_get :cache
+  alias :sog :cache
+
+  # set cache with 'key'
+  # - run #garbage_collect_expired_caches 
+  # - creates cache if it doesn't exist
+  def set key, value
+    garbage_collect_expired_caches
+    begin
+      write_cache_file( key, Marshal::dump(value) )
+      return true
+    rescue
+      return false
+    end
+  end
+  alias :add :set
+  alias :replace :set
+
+  # get cache with 'key'
+  # - reads cache if it exists and isn't expired 
+  #   or raises Diskcache::NotFound
+  # - if 'key' is an Array returns only keys 
+  #   which exist and aren't expired, it raises
+  #   Diskcache::NotFound if none are available
+  def get key
+    garbage_collect_expired_caches
+    begin
+      if key.is_a? Array
+        hash = {}
+        key.each do |k|
+          hash[k] = Marshal::load(read_cache_file(k)) unless expired?(k)
+        end
+        return hash unless hash.empty?
+      else
+        return Marshal::load(read_cache_file(key)) unless expired?(key)
+      end
+      raise Diskcached::NotFound
+    rescue
+      raise Diskcached::NotFound
     end
   end
 
@@ -110,6 +151,9 @@ class Diskcached
   # creates #store directory if it doesn't exist
   def ensure_store_directory
     Dir.mkdir( store ) unless File.directory?( store )
+  end
+
+  class NotFound < Exception
   end
 
 end
