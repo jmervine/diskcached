@@ -1,54 +1,60 @@
 # Benchmarks
 
+## Comments
+
+Diskcached wasn't designed to be a faster solution, just a simpler
+one when compaired to Memcached. However, from these benchmarks,
+it holds up will and even should provide slightly faster reads.
+
+
 ## Ruby 1.8.7
  
 **Warning:** Tests do not pass and therefore this isn't expected 
 to actaully work on ruby 1.8.7 at this point. I'm including the
 benchmarks for it as an academic excercise.
 
+## Ruby 1.8.7
+ 
 #### small string * 100000
 
 <pre>
-                 user     system      total        real
-  s_d_cache set  2.700000   2.450000   5.150000 (  5.198298)
-  memcached set  1.470000   1.300000   2.770000 (  4.112875)
-  s_d_cache get  1.370000   0.060000   1.430000 (  1.437898)
-  memcached get  1.260000   1.360000   2.620000 (  3.651778)
-</pre>
- 
+                  user     system      total        real
+  diskcached set  3.260000   5.630000   8.890000 ( 21.660488)
+  memcached  set  1.460000   1.280000   2.740000 (  4.070615)
+  diskcached get  1.800000   0.720000   2.520000 (  2.541142)
+  memcached  get  1.160000   1.410000   2.570000 (  3.609896)
+</pre> 
  
 #### large hash * 100000
 
 <pre>
-                user     system      total        real
-  s_d_cache set 13.100000   4.120000  17.220000 ( 17.321050)
-  memcached set 12.770000   2.420000  15.190000 ( 18.106920)
-  s_d_cache get  1.330000   0.080000   1.410000 (  1.415962)
-  memcached get  8.660000   1.610000  10.270000 ( 11.194536)
+                 user     system      total        real
+  diskcached set 17.740000   8.140000  25.880000 ( 59.677151)
+  memcached  set 13.840000   1.960000  15.800000 ( 18.235553)
+  diskcached get 11.860000   1.100000  12.960000 ( 13.003900)
+  memcached  get  9.270000   1.880000  11.150000 ( 12.346795)
 </pre>
-
 
 ## Ruby 1.9.2p318
  
 #### small string * 100000
 
 <pre>
-                 user     system      total        real
-  s_d_cache set  2.630000   2.150000   4.780000 (  4.809938)
-  memcached set  1.670000   1.640000   3.310000 (  5.108809)
-  s_d_cache get  1.310000   0.060000   1.370000 (  1.374200)
-  memcached get  1.690000   1.890000   3.580000 (  5.216778)
+                  user     system      total        real
+  diskcached set  3.370000   4.980000   8.350000 ( 20.467971)
+  memcached  set  1.340000   1.300000   2.640000 (  3.962354)
+  diskcached get  1.570000   0.350000   1.920000 (  1.939561)
+  memcached  get  1.330000   1.250000   2.580000 (  3.604914)
 </pre>
-
  
 #### large hash * 100000
 
 <pre>
-                user     system      total        real
-  s_d_cache set 16.850000   3.810000  20.660000 ( 20.753545)
-  memcached set 16.370000   1.900000  18.270000 ( 20.650906)
-  s_d_cache get  1.310000   0.070000   1.380000 (  1.378545)
-  memcached get 11.510000   1.610000  13.120000 ( 14.036453)
+                 user     system      total        real
+  diskcached set 21.460000   6.950000  28.410000 ( 58.982826)
+  memcached  set 16.510000   1.920000  18.430000 ( 20.862692)
+  diskcached get 16.570000   0.690000  17.260000 ( 17.306181)
+  memcached  get 12.120000   1.630000  13.750000 ( 14.967464)
 </pre>
 
 
@@ -57,22 +63,19 @@ benchmarks for it as an academic excercise.
 #### small string * 100000
 
 <pre>
-                 user     system      total        real
-  s_d_cache set  2.820000   2.190000   5.010000 (  5.042452)
-  memcached set  1.380000   1.410000   2.790000 (  4.122374)
-  s_d_cache get  1.380000   0.040000   1.420000 (  1.414243)
-  memcached get  1.350000   1.320000   2.670000 (  3.696904)
-</pre>
- 
+                  user     system      total        real
+  diskcached set  3.520000   5.220000   8.740000 ( 21.928190)
+  memcached  set  1.350000   1.480000   2.830000 (  4.178223)
+  diskcached get  1.830000   0.370000   2.200000 (  2.215781)
+  memcached  get  1.570000   1.710000   3.280000 (  4.662109)
+</pre> 
  
 #### large hash * 100000
 
 <pre>
-                user     system      total        real
-  s_d_cache set 16.410000   3.410000  19.820000 ( 19.936363)
-  memcached set 17.570000   2.160000  19.730000 ( 22.692966)
-  s_d_cache get  1.330000   0.050000   1.380000 (  1.396471)
-  memcached get 13.410000   1.950000  15.360000 ( 16.601655)
+                 user     system      total        real
+  diskcached set 20.670000   7.170000  27.840000 ( 59.877671)
+  memcached  set 15.310000   2.790000  18.100000 ( 21.132083)
+  diskcached get 14.950000   0.700000  15.650000 ( 15.720669)
+  memcached  get 14.850000   1.840000  16.690000 ( 17.971276)
 </pre>
-
-
