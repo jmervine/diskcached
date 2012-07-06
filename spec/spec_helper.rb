@@ -4,7 +4,7 @@ SimpleCov.start do
 end
 require 'rspec'
 require 'fileutils'
-require './lib/simple_disk_cache.rb'
+require './lib/diskcached'
 
 # create things to cache and test
 class TestObject

@@ -2,17 +2,17 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
  
-require 'simple_disk_cache'
+require 'diskcached'
  
 Gem::Specification.new do |s|
-  s.name        = "simple_disk_cache"
-  s.version     = SimpleDiskCache::VERSION
+  s.name        = "diskcached"
+  s.version     = Diskcached::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Joshua Mervine"]
   s.email       = ["joshua@mervine.net"]
-  s.homepage    = "http://jmervine.github.com/simple_disk_cache/"
+  s.homepage    = "http://jmervine.github.com/diskcached/"
   s.summary     = "Simple disk cache"
-  s.description = "Simple disk cache for things like Sinatra"
+  s.description = "Simple disk cache for things like Sinatra which is implemented much like Memcached in hopes that in some cases they're interchangeable."
  
   s.required_rubygems_version = ">= 1.3.6"
   #s.rubyforge_project         = ""

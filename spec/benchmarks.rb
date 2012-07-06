@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'benchmark'
 require 'memcached'
-require File.join(File.dirname(__FILE__), '..', 'lib', 'simple_disk_cache')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'diskcached')
 
 # benchmarks helpers
 
@@ -20,8 +20,8 @@ TIMES      = 100000
 # print ruby version as header
 puts "## Ruby #{`ruby -v | awk '{print $2}'`.chomp}"
 
-  write_cache = SimpleDiskCache.new('/tmp/benchmark',0)
-  read_cache  = SimpleDiskCache.new('/tmp/benchmark')
+  write_cache = Diskcached.new('/tmp/benchmark',0)
+  read_cache  = Diskcached.new('/tmp/benchmark')
   memcache = Memcached.new('localhost:11211')
 
   puts " "

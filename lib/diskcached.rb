@@ -1,6 +1,8 @@
 # @author Joshua P. Mervine <joshua@mervine.net>
-#
-class SimpleDiskCache
+# 
+# TODO: implement 'get' and 'set' to look more like 
+# memcached
+class Diskcached
   # version for Hoe and therefore gem
   VERSION = '1.0.0'
 
