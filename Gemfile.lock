@@ -25,7 +25,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json
   memcached
   rake
   rdoc
