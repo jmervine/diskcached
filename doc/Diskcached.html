@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="text/html; charset=US-ASCII" http-equiv="Content-Type">
 
 <title>class Diskcached - RDoc Documentation</title>
 
@@ -80,23 +80,19 @@
     
     <li><a href="#method-i-delete">#delete</a>
     
-    <li><a href="#method-i-expire-21">#expire!</a>
-    
-    <li><a href="#method-i-expire_all-21">#expire_all!</a>
-    
     <li><a href="#method-i-expired-3F">#expired?</a>
     
     <li><a href="#method-i-flush">#flush</a>
+    
+    <li><a href="#method-i-flush_expired">#flush_expired</a>
+    
+    <li><a href="#method-i-flush_expired-21">#flush_expired!</a>
     
     <li><a href="#method-i-get">#get</a>
     
     <li><a href="#method-i-replace">#replace</a>
     
     <li><a href="#method-i-set">#set</a>
-    
-    <li><a href="#method-i-set_or_get">#set_or_get</a>
-    
-    <li><a href="#method-i-sog">#sog</a>
     
   </ul>
 </nav>
@@ -158,15 +154,41 @@
       <h3 class="section-header">Attributes</h3>
 
       
-      <div id="attribute-i-last_gc" class="method-detail">
+      <div id="attribute-i-gc_auto" class="method-detail">
         <div class="method-heading attribute-method-heading">
-          <span class="method-name">last_gc</span><span
+          <span class="method-name">gc_auto</span><span
             class="attribute-access-type">[R]</span>
         </div>
 
         <div class="method-description">
         
-        <p>time of last garbage_collect_expired_caches</p>
+        <p>should auto_garbage_collect</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-gc_last" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">gc_last</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>time of last garbage_collect</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-gc_time" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">gc_time</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>how often to auto_garbage_collect</p>
         
         </div>
       </div>
@@ -210,7 +232,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(store="/tmp/cache", timeout=600)</span>
+            class="method-args">(store="/tmp/cache", timeout=600, autogc=true)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
@@ -220,12 +242,12 @@
           <p>initialize object</p>
 <ul><li>
 <p>set <a href="Diskcached.html#attribute-i-store">store</a> to passed or
-default (‘/tmp/cache’)</p>
+default ('/tmp/cache')</p>
 </li><li>
 <p>set <a href="Diskcached.html#attribute-i-timeout">timeout</a> to passed or
-default (‘600’)</p>
+default ('600')</p>
 </li><li>
-<p>set <a href="Diskcached.html#attribute-i-last_gc">last_gc</a> to current
+<p>set <a href="Diskcached.html#attribute-i-gc_last">gc_last</a> to current
 time</p>
 </li><li>
 <p>run ensure_store_directory</p>
@@ -234,11 +256,18 @@ time</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 21</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">store</span>=<span class="ruby-string">&quot;/tmp/cache&quot;</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-value">600</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">store</span>=<span class="ruby-string">&quot;/tmp/cache&quot;</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-value">600</span>, <span class="ruby-identifier">autogc</span>=<span class="ruby-keyword">true</span>
   <span class="ruby-ivar">@store</span>   = <span class="ruby-identifier">store</span>
   <span class="ruby-ivar">@timeout</span> = <span class="ruby-identifier">timeout</span>
-  <span class="ruby-ivar">@last_gc</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">timeout</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@gc_last</span>, <span class="ruby-ivar">@gc_time</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-ivar">@gc_auto</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@gc_last</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+    <span class="ruby-ivar">@gc_auto</span> = <span class="ruby-identifier">autogc</span>
+    <span class="ruby-ivar">@gc_time</span> = (<span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">600</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">timeout</span> <span class="ruby-operator">:</span> <span class="ruby-value">600</span>)
+  <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">ensure_store_directory</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
@@ -295,11 +324,9 @@ time</p>
 
         <div class="method-description">
           
-          <p>create and read cache with ‘key’</p>
+          <p>create and read cache with 'key'</p>
 <ul><li>
-<p>run garbage_collect_expired_caches</p>
-</li><li>
-<p>creates cache if it doesn’t exist</p>
+<p>creates cache if it doesn't exist</p>
 </li><li>
 <p>reads cache if it exists</p>
 </li></ul>
@@ -307,9 +334,8 @@ time</p>
 
           
           <div class="method-source-code" id="cache-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache</span> <span class="ruby-identifier">key</span>
-  <span class="ruby-identifier">garbage_collect_expired_caches</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">expired?</span>(<span class="ruby-identifier">key</span>)
       <span class="ruby-identifier">content</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-keyword">yield</span> }.<span class="ruby-identifier">call</span>
@@ -325,10 +351,6 @@ time</p>
           
         </div>
 
-        
-        <div class="aliases">
-          Also aliased as: <a href="Diskcached.html#method-i-set_or_get">set_or_get</a>, <a href="Diskcached.html#method-i-sog">sog</a>
-        </div>
         
 
         
@@ -346,12 +368,12 @@ time</p>
 
         <div class="method-description">
           
-          <p>returns path to cache file with ‘key’</p>
+          <p>returns path to cache file with 'key'</p>
           
 
           
           <div class="method-source-code" id="cache_file-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 108</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache_file</span> <span class="ruby-identifier">key</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.cache&quot;</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -365,7 +387,7 @@ time</p>
       </div><!-- cache_file-method -->
 
     
-      <div id="method-i-delete" class="method-detail method-alias">
+      <div id="method-i-delete" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">delete</span><span
@@ -376,91 +398,23 @@ time</p>
 
         <div class="method-description">
           
-          
-          
-
-          
-        </div>
-
-        
-
-        
-        <div class="aliases">
-          Alias for: <a href="Diskcached.html#method-i-expire-21">expire!</a>
-        </div>
-        
-      </div><!-- delete-method -->
-
-    
-      <div id="method-i-expire-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">expire!</span><span
-            class="method-args">(key)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>expire cache with ‘key’</p>
+          <p>expire cache with 'key'</p>
           
 
           
-          <div class="method-source-code" id="expire-21-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">expire!</span> <span class="ruby-identifier">key</span>
+          <div class="method-source-code" id="delete-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">key</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-identifier">cache_file</span>(<span class="ruby-identifier">key</span>) ) <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-identifier">cache_file</span>(<span class="ruby-identifier">key</span>) )
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- expire-21-source -->
+          </div><!-- delete-source -->
           
         </div>
 
         
-        <div class="aliases">
-          Also aliased as: <a href="Diskcached.html#method-i-delete">delete</a>
-        </div>
-        
 
         
-      </div><!-- expire-21-method -->
-
-    
-      <div id="method-i-expire_all-21" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">expire_all!</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>expire (delete) all caches in <a
-href="Diskcached.html#attribute-i-store">store</a> directory</p>
-          
-
-          
-          <div class="method-source-code" id="expire_all-21-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">expire_all!</span> 
-  <span class="ruby-constant">Dir</span>[ <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-string">'*.cache'</span> ) ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">file</span>) 
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- expire_all-21-source -->
-          
-        </div>
-
-        
-        <div class="aliases">
-          Also aliased as: <a href="Diskcached.html#method-i-flush">flush</a>
-        </div>
-        
-
-        
-      </div><!-- expire_all-21-method -->
+      </div><!-- delete-method -->
 
     
       <div id="method-i-expired-3F" class="method-detail ">
@@ -474,13 +428,14 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
 
         <div class="method-description">
           
-          <p>return true if cache with ‘key’ is expired</p>
+          <p>return true if cache with 'key' is expired</p>
           
 
           
           <div class="method-source-code" id="expired-3F-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 29</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expired?</span> <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">timeout</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">mtime</span> = <span class="ruby-identifier">read_cache_mtime</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">return</span> (<span class="ruby-identifier">mtime</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">mtime</span><span class="ruby-operator">+</span><span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -494,7 +449,7 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
       </div><!-- expired-3F-method -->
 
     
-      <div id="method-i-flush" class="method-detail method-alias">
+      <div id="method-i-flush" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">flush</span><span
@@ -505,20 +460,93 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
 
         <div class="method-description">
           
-          
+          <p>expire (delete) all caches in <a
+href="Diskcached.html#attribute-i-store">store</a> directory</p>
           
 
+          
+          <div class="method-source-code" id="flush-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">flush</span>
+  <span class="ruby-constant">Dir</span>[ <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-string">'*.cache'</span> ) ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">file</span>) 
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- flush-source -->
           
         </div>
 
         
 
-        
-        <div class="aliases">
-          Alias for: <a href="Diskcached.html#method-i-expire_all-21">expire_all!</a>
-        </div>
         
       </div><!-- flush-method -->
+
+    
+      <div id="method-i-flush_expired" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">flush_expired</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>flush expired caches if garbage collection hasn't been run recently</p>
+          
+
+          
+          <div class="method-source-code" id="flush_expired-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_expired</span> 
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">gc_time</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">gc_last</span><span class="ruby-operator">+</span><span class="ruby-identifier">gc_time</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> 
+    <span class="ruby-identifier">flush_expired!</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- flush_expired-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- flush_expired-method -->
+
+    
+      <div id="method-i-flush_expired-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">flush_expired!</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>flash expired caches, ingoring when garbage collection was last run</p>
+          
+
+          
+          <div class="method-source-code" id="flush_expired-21-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_expired!</span>
+  <span class="ruby-constant">Dir</span>[ <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-string">&quot;*.cache&quot;</span> ) ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> 
+    <span class="ruby-keyword">if</span> (<span class="ruby-constant">File</span>.<span class="ruby-identifier">mtime</span>(<span class="ruby-identifier">f</span>)<span class="ruby-operator">+</span><span class="ruby-identifier">timeout</span>) <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">f</span>) 
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@gc_last</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- flush_expired-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- flush_expired-21-method -->
 
     
       <div id="method-i-get" class="method-detail ">
@@ -532,28 +560,29 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
 
         <div class="method-description">
           
-          <p>get cache with ‘key’</p>
+          <p>get cache with 'key'</p>
 <ul><li>
-<p>reads cache if it exists and isn’t expired  or raises Diskcache::NotFound</p>
+<p>reads cache if it exists and isn't expired  or raises Diskcache::NotFound</p>
 </li><li>
-<p>if ‘key’ is an Array returns only keys  which exist and aren’t expired, it
+<p>if 'key' is an Array returns only keys  which exist and aren't expired, it
 raises Diskcache::NotFound if none are available</p>
 </li></ul>
           
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 89</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span> <span class="ruby-identifier">key</span>
-  <span class="ruby-identifier">garbage_collect_expired_caches</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
       <span class="ruby-identifier">hash</span> = {}
       <span class="ruby-identifier">key</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Marshal</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-identifier">read_cache_file</span>(<span class="ruby-identifier">k</span>)) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">expired?</span>(<span class="ruby-identifier">k</span>)
       <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">flush_expired</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_auto</span>
       <span class="ruby-keyword">return</span> <span class="ruby-identifier">hash</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">flush_expired</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_auto</span>
       <span class="ruby-keyword">return</span> <span class="ruby-constant">Marshal</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-identifier">read_cache_file</span>(<span class="ruby-identifier">key</span>)) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">expired?</span>(<span class="ruby-identifier">key</span>)
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">Diskcached</span><span class="ruby-operator">::</span><span class="ruby-constant">NotFound</span>
@@ -609,23 +638,24 @@ raises Diskcache::NotFound if none are available</p>
 
         <div class="method-description">
           
-          <p>set cache with ‘key’</p>
+          <p>set cache with 'key'</p>
 <ul><li>
-<p>run garbage_collect_expired_caches</p>
+<p>run auto_garbage_collect</p>
 </li><li>
-<p>creates cache if it doesn’t exist</p>
+<p>creates cache if it doesn't exist</p>
 </li></ul>
           
 
           
           <div class="method-source-code" id="set-source">
-            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 71</span>
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>
-  <span class="ruby-identifier">garbage_collect_expired_caches</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">write_cache_file</span>( <span class="ruby-identifier">key</span>, <span class="ruby-constant">Marshal</span><span class="ruby-operator">::</span><span class="ruby-identifier">dump</span>(<span class="ruby-identifier">value</span>) )
+    <span class="ruby-identifier">flush_expired</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_auto</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
   <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">flush_expired</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_auto</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -641,60 +671,6 @@ raises Diskcache::NotFound if none are available</p>
 
         
       </div><!-- set-method -->
-
-    
-      <div id="method-i-set_or_get" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">set_or_get</span><span
-            class="method-args">(key)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-        </div>
-
-        
-
-        
-        <div class="aliases">
-          Alias for: <a href="Diskcached.html#method-i-cache">cache</a>
-        </div>
-        
-      </div><!-- set_or_get-method -->
-
-    
-      <div id="method-i-sog" class="method-detail method-alias">
-        
-        <div class="method-heading">
-          <span class="method-name">sog</span><span
-            class="method-args">(key)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-        </div>
-
-        
-
-        
-        <div class="aliases">
-          Alias for: <a href="Diskcached.html#method-i-cache">cache</a>
-        </div>
-        
-      </div><!-- sog-method -->
 
     
     </section><!-- public-instance-method-details -->
