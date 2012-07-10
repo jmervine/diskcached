@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Joshua Mervine"]
   s.email       = ["joshua@mervine.net"]
-  s.homepage    = "http://jmervine.github.com/diskcached/"
+  s.homepage    = "http://diskcached.rubyops.net/"
   s.summary     = "Simple disk cache"
   s.description = "Simple disk cache for things like Sinatra which is implemented much like Memcached in hopes that in some cases they're interchangeable."
  
