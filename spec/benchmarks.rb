@@ -53,8 +53,7 @@ puts "## Ruby #{`ruby -v | awk '{print $2}'`.chomp}"
     end
   end
 
-  diskcache.expire_all!
-  diskcache.expire_all!
+  diskcache.flush
 
   puts " "
   puts " "
