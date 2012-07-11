@@ -6,74 +6,44 @@ Diskcached wasn't designed to be a faster solution, just a simpler
 one when compaired to Memcached. However, from these benchmarks,
 it holds up will and even should provide slightly faster reads.
 
-
-## Ruby 1.8.7
- 
-**Warning:** Tests do not pass and therefore this isn't expected 
-to actaully work on ruby 1.8.7 at this point. I'm including the
-benchmarks for it as an academic excercise.
+## Ruby 1.9.3p194
  
 #### small string * 100000
-
 <pre>
-                  user     system      total        real
-  diskcached set  3.260000   5.630000   8.890000 ( 21.660488)
-  memcached  set  1.460000   1.280000   2.740000 (  4.070615)
-  diskcached get  1.800000   0.720000   2.520000 (  2.541142)
-  memcached  get  1.160000   1.410000   2.570000 (  3.609896)
+                user     system      total        real
+diskcached set  3.110000   5.160000   8.270000 ( 20.986365)
+memcached  set  1.410000   1.390000   2.800000 (  4.203253)
+diskcached get  1.290000   0.440000   1.730000 (  1.743141)
+memcached  get  1.230000   1.360000   2.590000 (  3.618572)
 </pre> 
  
 #### large hash * 100000
-
 <pre>
-                 user     system      total        real
-  diskcached set 17.740000   8.140000  25.880000 ( 59.677151)
-  memcached  set 13.840000   1.960000  15.800000 ( 18.235553)
-  diskcached get 11.860000   1.100000  12.960000 ( 13.003900)
-  memcached  get  9.270000   1.880000  11.150000 ( 12.346795)
+               user     system      total        real
+diskcached set 19.630000   6.980000  26.610000 ( 60.177955)
+memcached  set 17.050000   2.390000  19.440000 ( 22.410836)
+diskcached get 13.300000   0.610000  13.910000 ( 13.978462)
+memcached  get 12.570000   1.520000  14.090000 ( 14.822417)
 </pre>
 
 ## Ruby 1.9.2p318
  
-#### small string * 100000
-
+### small string * 100000
 <pre>
-                  user     system      total        real
-  diskcached set  3.370000   4.980000   8.350000 ( 20.467971)
-  memcached  set  1.340000   1.300000   2.640000 (  3.962354)
-  diskcached get  1.570000   0.350000   1.920000 (  1.939561)
-  memcached  get  1.330000   1.250000   2.580000 (  3.604914)
-</pre>
- 
-#### large hash * 100000
-
-<pre>
-                 user     system      total        real
-  diskcached set 21.460000   6.950000  28.410000 ( 58.982826)
-  memcached  set 16.510000   1.920000  18.430000 ( 20.862692)
-  diskcached get 16.570000   0.690000  17.260000 ( 17.306181)
-  memcached  get 12.120000   1.630000  13.750000 ( 14.967464)
-</pre>
-
-
-## Ruby 1.9.3p194
- 
-#### small string * 100000
-
-<pre>
-                  user     system      total        real
-  diskcached set  3.520000   5.220000   8.740000 ( 21.928190)
-  memcached  set  1.350000   1.480000   2.830000 (  4.178223)
-  diskcached get  1.830000   0.370000   2.200000 (  2.215781)
-  memcached  get  1.570000   1.710000   3.280000 (  4.662109)
+                user     system      total        real
+diskcached set  3.130000   5.000000   8.130000 ( 20.267969)
+memcached  set  1.290000   1.360000   2.650000 (  3.987257)
+diskcached get  1.300000   0.430000   1.730000 (  1.734428)
+memcached  get  1.200000   1.370000   2.570000 (  3.609192)
 </pre> 
  
-#### large hash * 100000
-
+### large hash * 100000
 <pre>
-                 user     system      total        real
-  diskcached set 20.670000   7.170000  27.840000 ( 59.877671)
-  memcached  set 15.310000   2.790000  18.100000 ( 21.132083)
-  diskcached get 14.950000   0.700000  15.650000 ( 15.720669)
-  memcached  get 14.850000   1.840000  16.690000 ( 17.971276)
+               user     system      total        real
+diskcached set 20.140000   6.610000  26.750000 ( 59.838819)
+memcached  set 15.480000   2.790000  18.270000 ( 20.464405)
+diskcached get 13.490000   0.750000  14.240000 ( 14.271641)
+memcached  get 13.080000   1.430000  14.510000 ( 15.253489)
 </pre>
+
+

@@ -178,6 +178,7 @@ describe Diskcached do
       sleep 0.5
       expect { @cache.flush_expired }.should_not raise_error
       @cache.expired?('flush1').should be_true
+      sleep 0.1
       File.exists?('/tmp/rspec/cache/flush1.cache').should be_false
     end
   end
@@ -197,6 +198,7 @@ describe Diskcached do
       @cache.expired?('flush1').should be_true
       @cache.instance_variable_set(:@gc_last, Time.now)
       expect { @cache.flush_expired! }.should_not raise_error
+      sleep 0.1
       File.exists?('/tmp/rspec/cache/flush1.cache').should be_false
     end
   end

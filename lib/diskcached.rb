@@ -67,12 +67,18 @@ class Diskcached
   # flash expired caches, ingoring when garbage
   # collection was last run
   def flush_expired!
-    Dir[ File.join( store, "*.cache" ) ].each do |f| 
-      if (File.mtime(f)+timeout) <= Time.now
-        File.delete(f) 
+    gcpid = Process.fork do
+      begin
+        Dir[ File.join( store, "*.cache" ) ].each do |f| 
+          if (File.mtime(f)+timeout) <= Time.now
+            File.delete(f) 
+          end
+        end
+      ensure
+        @gc_last = Time.now
       end
     end
-    @gc_last = Time.now
+    Process.detach(gcpid)
   end
 
   # create and read cache with 'key'
