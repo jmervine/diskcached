@@ -1,288 +1,245 @@
-<?xml version="1.0" encoding="US-ASCII"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+
+<html>
 <head>
-    <!-- RD version: 0.10.0  -->
-  <meta content="text/html; charset=US-ASCII" http-equiv="Content-Type" />
-  <title>Class: Diskcached</title>
-  <link rel="stylesheet" href="css/obf.css" >
+<meta content="text/html; charset=US-ASCII" http-equiv="Content-Type">
 
-  <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/rubydoc.js" type="text/javascript" charset="utf-8"></script> 
+<title>class Diskcached - Diskcached 1.1.0</title>
 
- 
-<script src="js/highlight.min.js"></script>
-<script> 
-  hljs.tabReplace = '  ';
-  hljs.initHighlightingOnLoad();
-  </script> 
-</head>
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
 
 <body id="top" class="class">
-<div id='actionbar' >
-<div class='wrapper'>
-  
-</div>
-</div> <!-- end action bar -->
- <div class='wrapper'>
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="index.html">Home</a>
-          <a href="index.html#classes">Classes</a>
-          <a href="index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-    <div id="file-metadata">
-      <div id="file-list-section" class="section">
-        <h3 class="section-header">In Files</h3>
-        <div class="section-body">
-          <ul>
-          
-            <li><a href="lib/diskcached_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/diskcached.rb">lib/diskcached.rb</a></li>
-          
-          </ul>
-        </div>
-      </div>
 
-      
-    </div>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-    <div id="class-metadata">
-      
-      <!-- Parent Class -->
-      <div id="parent-class-section" class="section">
-        <h3 class="section-header">Parent</h3>
-        
-        <p class="link">Object</p>
-        
-      </div>
-      
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-      
 
-      
-      <!-- Namespace Contents -->
-      <div id="namespace-list-section" class="section">
-        <h3 class="section-header">Namespace</h3>
-        <ul class="link-list">
-          
-          <li><span class="type">CLASS</span> <a href="Diskcached/NotFound.html">Diskcached::NotFound</a></li>
-          
-        </ul>
-      </div>
-      
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/diskcached.rb
+  </ul>
+</nav>
 
-      
-      <!-- Method Quickref -->
-      <div id="method-list-section" class="section">
-        <h3 class="section-header">Methods</h3>
-        <ul class="link-list">
-          
-          <li><a href="#method-c-new">::new</a></li>
-          
-          <li><a href="#method-i-add">#add</a></li>
-          
-          <li><a href="#method-i-cache">#cache</a></li>
-          
-          <li><a href="#method-i-cache_file">#cache_file</a></li>
-          
-          <li><a href="#method-i-delete">#delete</a></li>
-          
-          <li><a href="#method-i-expired-3F">#expired?</a></li>
-          
-          <li><a href="#method-i-flush">#flush</a></li>
-          
-          <li><a href="#method-i-flush_expired">#flush_expired</a></li>
-          
-          <li><a href="#method-i-flush_expired-21">#flush_expired!</a></li>
-          
-          <li><a href="#method-i-get">#get</a></li>
-          
-          <li><a href="#method-i-replace">#replace</a></li>
-          
-          <li><a href="#method-i-set">#set</a></li>
-          
-        </ul>
-      </div>
-      
-
-      
-    </div>
-
-    <div id="project-metadata">
-      
-      
-
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class/Module Index
-          <span class="search-toggle"><img src="images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
-
-        <ul class="link-list">
-        
-          <li><a href="Diskcached.html">Diskcached</a></li>
-        
-          <li><a href="Diskcached/NotFound.html">Diskcached::NotFound</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
-
-      
-    </div>
+    
   </div>
 
-  <div id="documentation">
-    <h1 class="class">Diskcached</h1>
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
 
-    <div id="description" class="description">
-      
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-add">#add</a>
+    
+    <li><a href="#method-i-cache">#cache</a>
+    
+    <li><a href="#method-i-cache_file">#cache_file</a>
+    
+    <li><a href="#method-i-delete">#delete</a>
+    
+    <li><a href="#method-i-expired-3F">#expired?</a>
+    
+    <li><a href="#method-i-flush">#flush</a>
+    
+    <li><a href="#method-i-flush_expired">#flush_expired</a>
+    
+    <li><a href="#method-i-flush_expired-21">#flush_expired!</a>
+    
+    <li><a href="#method-i-get">#get</a>
+    
+    <li><a href="#method-i-replace">#replace</a>
+    
+    <li><a href="#method-i-set">#set</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Diskcached.html">Diskcached</a>
+  
+    <li><a href="./Diskcached/NotFound.html">Diskcached::NotFound</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Diskcached</h1>
+
+  <div id="description" class="description">
+    
 <p>@author Joshua P. Mervine &lt;joshua@mervine.net&gt;</p>
 
-    </div><!-- description -->
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
 
     
-    
-    
-    <div id="5Buntitled-5D" class="documentation-section">
-      
 
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
       
-
-      
-      <!-- Constants -->
-      <div id="constants-list" class="section">
-        <h3 class="section-header">Constants</h3>
-        <dl>
+        <dt id="VERSION">VERSION
         
-          <dt><a name="VERSION">VERSION</a></dt>
-          
-          <dd class="description"><p>version for gem</p></dd>
-          
+        <dd class="description"><p>version for gem</p>
         
-        </dl>
+      
+      </dl>
+    </section>
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-gc_auto" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">gc_auto</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>should auto_garbage_collect</p>
+        
+        </div>
       </div>
       
+      <div id="attribute-i-gc_last" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">gc_last</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
 
+        <div class="method-description">
+        
+        <p>time of last garbage_collect</p>
+        
+        </div>
+      </div>
       
-      <!-- Attributes -->
-      <div id="attribute-method-details" class="method-section section">
-        <h3 class="section-header">Attributes</h3>
-
-        
-        <div id="gc_auto-attribute-method" class="method-detail">
-          <a name="gc_auto"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">gc_auto</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
-
-          <div class="method-description">
-          
-          <p>should auto_garbage_collect</p>
-          
-          </div>
+      <div id="attribute-i-gc_time" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">gc_time</span><span
+            class="attribute-access-type">[R]</span>
         </div>
-        
-        <div id="gc_last-attribute-method" class="method-detail">
-          <a name="gc_last"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">gc_last</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
 
-          <div class="method-description">
-          
-          <p>time of last garbage_collect</p>
-          
-          </div>
-        </div>
+        <div class="method-description">
         
-        <div id="gc_time-attribute-method" class="method-detail">
-          <a name="gc_time"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">gc_time</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
-
-          <div class="method-description">
-          
-          <p>how often to auto_garbage_collect</p>
-          
-          </div>
-        </div>
+        <p>how often to auto_garbage_collect</p>
         
-        <div id="store-attribute-method" class="method-detail">
-          <a name="store"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">store</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
-
-          <div class="method-description">
-          
-          <p>disk location for cache store</p>
-          
-          </div>
         </div>
-        
-        <div id="timeout-attribute-method" class="method-detail">
-          <a name="timeout"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">timeout</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
-
-          <div class="method-description">
-          
-          <p>cache timeout</p>
-          
-          </div>
-        </div>
-        
-      </div><!-- attribute-method-details -->
+      </div>
       
+      <div id="attribute-i-store" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">store</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
 
-      <!-- Methods -->
+        <div class="method-description">
+        
+        <p>disk location for cache store</p>
+        
+        </div>
+      </div>
       
-      <div id="public-class-method-details" class="method-section section">
-        <h3 class="section-header">Public Class Methods</h3>
+      <div id="attribute-i-timeout" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">timeout</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
 
+        <div class="method-description">
+        
+        <p>cache timeout</p>
+        
+        </div>
+      </div>
       
-        <div id="new-method" class="method-detail ">
-          <a name="method-c-new"></a>
+    </section><!-- attribute-method-details -->
+    
 
-          
-          <div class="method-heading">
-            <span class="method-name">new</span><span
-              class="method-args">(store="/tmp/cache", timeout=600, autogc=true)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
 
-          <div class="method-description">
-            
-            <p>initialize object</p>
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(store="/tmp/cache", timeout=600, autogc=true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>initialize object</p>
 <ul><li>
 <p>set <a href="Diskcached.html#attribute-i-store">store</a> to passed or
 default ('/tmp/cache')</p>
@@ -295,13 +252,11 @@ time</p>
 </li><li>
 <p>run ensure_store_directory</p>
 </li></ul>
-            
+          
 
-            
-            <div class="method-source-code" id="new-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 26</span>
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">store</span>=<span class="ruby-string">&quot;/tmp/cache&quot;</span>, <span class="ruby-identifier">timeout</span>=<span class="ruby-value">600</span>, <span class="ruby-identifier">autogc</span>=<span class="ruby-keyword">true</span>
   <span class="ruby-ivar">@store</span>   = <span class="ruby-identifier">store</span>
   <span class="ruby-ivar">@timeout</span> = <span class="ruby-identifier">timeout</span>
@@ -314,78 +269,72 @@ time</p>
     <span class="ruby-ivar">@gc_time</span> = (<span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">600</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">timeout</span> <span class="ruby-operator">:</span> <span class="ruby-value">600</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">ensure_store_directory</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- new-source -->
-            
-          </div>
-
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
           
+        </div>
 
-          
-        </div><!-- new-method -->
-      
-      </div><!-- public-class-method-details -->
+        
+
+        
+      </div><!-- new-method -->
+
     
-      <div id="public-instance-method-details" class="method-section section">
-        <h3 class="section-header">Public Instance Methods</h3>
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
-      
-        <div id="add-method" class="method-detail method-alias">
-          <a name="method-i-add"></a>
+    
+      <div id="method-i-add" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">add</span><span
+            class="method-args">(key, value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
+        <div class="method-description">
           
-          <div class="method-heading">
-            <span class="method-name">add</span><span
-              class="method-args">(key, value)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
           
-
-          <div class="method-description">
-            
-            
-            
-
-            
-          </div>
-
           
 
           
-          <div class="aliases">
-            Alias for: <a href="Diskcached.html#method-i-set">set</a>
-          </div>
-          
-        </div><!-- add-method -->
-      
-        <div id="cache-method" class="method-detail ">
-          <a name="method-i-cache"></a>
+        </div>
 
-          
-          <div class="method-heading">
-            <span class="method-name">cache</span><span
-              class="method-args">(key)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
+        
 
-          <div class="method-description">
-            
-            <p>create and read cache with 'key'</p>
+        
+        <div class="aliases">
+          Alias for: <a href="Diskcached.html#method-i-set">set</a>
+        </div>
+        
+      </div><!-- add-method -->
+
+    
+      <div id="method-i-cache" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cache</span><span
+            class="method-args">(key) { || ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>create and read cache with 'key'</p>
 <ul><li>
 <p>creates cache if it doesn't exist</p>
 </li><li>
 <p>reads cache if it exists</p>
 </li></ul>
-            
+          
 
-            
-            <div class="method-source-code" id="cache-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 81</span>
+          
+          <div class="method-source-code" id="cache-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache</span> <span class="ruby-identifier">key</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">expired?</span>(<span class="ruby-identifier">key</span>)
@@ -397,221 +346,191 @@ time</p>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LocalJumpError</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- cache-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cache-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- cache-method -->
+
+    
+      <div id="method-i-cache_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cache_file</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns path to cache file with 'key'</p>
           
 
           
-        </div><!-- cache-method -->
-      
-        <div id="cache_file-method" class="method-detail ">
-          <a name="method-i-cache_file"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">cache_file</span><span
-              class="method-args">(key)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>returns path to cache file with 'key'</p>
-            
-
-            
-            <div class="method-source-code" id="cache_file-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 136</span>
+          <div class="method-source-code" id="cache_file-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cache_file</span> <span class="ruby-identifier">key</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.cache&quot;</span> )
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- cache_file-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- cache_file-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- cache_file-method -->
+
+    
+      <div id="method-i-delete" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>expire cache with 'key'</p>
           
 
           
-        </div><!-- cache_file-method -->
-      
-        <div id="delete-method" class="method-detail ">
-          <a name="method-i-delete"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">delete</span><span
-              class="method-args">(key)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>expire cache with 'key'</p>
-            
-
-            
-            <div class="method-source-code" id="delete-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 48</span>
+          <div class="method-source-code" id="delete-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span> <span class="ruby-identifier">key</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>( <span class="ruby-identifier">cache_file</span>(<span class="ruby-identifier">key</span>) ) <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>( <span class="ruby-identifier">cache_file</span>(<span class="ruby-identifier">key</span>) )
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- delete-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- delete-method -->
+
+    
+      <div id="method-i-expired-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">expired?</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>return true if cache with 'key' is expired</p>
           
 
           
-        </div><!-- delete-method -->
-      
-        <div id="expired-3F-method" class="method-detail ">
-          <a name="method-i-expired-3F"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">expired?</span><span
-              class="method-args">(key)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>return true if cache with 'key' is expired</p>
-            
-
-            
-            <div class="method-source-code" id="expired-3F-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 41</span>
+          <div class="method-source-code" id="expired-3F-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">expired?</span> <span class="ruby-identifier">key</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">timeout</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">mtime</span> = <span class="ruby-identifier">read_cache_mtime</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">return</span> (<span class="ruby-identifier">mtime</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">mtime</span><span class="ruby-operator">+</span><span class="ruby-identifier">timeout</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- expired-3F-source -->
-            
-          </div>
-
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- expired-3F-source -->
           
+        </div>
 
-          
-        </div><!-- expired-3F-method -->
-      
-        <div id="flush-method" class="method-detail ">
-          <a name="method-i-flush"></a>
+        
 
-          
-          <div class="method-heading">
-            <span class="method-name">flush</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
+        
+      </div><!-- expired-3F-method -->
 
-          <div class="method-description">
-            
-            <p>expire (delete) all caches in <a
+    
+      <div id="method-i-flush" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">flush</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>expire (delete) all caches in <a
 href="Diskcached.html#attribute-i-store">store</a> directory</p>
-            
+          
 
-            
-            <div class="method-source-code" id="flush-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 53</span>
+          
+          <div class="method-source-code" id="flush-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush</span>
   <span class="ruby-constant">Dir</span>[ <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-string">'*.cache'</span> ) ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">file</span>) 
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- flush-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- flush-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- flush-method -->
+
+    
+      <div id="method-i-flush_expired" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">flush_expired</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>flush expired caches if garbage collection hasn't been run recently</p>
           
 
           
-        </div><!-- flush-method -->
-      
-        <div id="flush_expired-method" class="method-detail ">
-          <a name="method-i-flush_expired"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">flush_expired</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>flush expired caches if garbage collection hasn't been run recently</p>
-            
-
-            
-            <div class="method-source-code" id="flush_expired-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 61</span>
+          <div class="method-source-code" id="flush_expired-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_expired</span> 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">gc_time</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">gc_last</span><span class="ruby-operator">+</span><span class="ruby-identifier">gc_time</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> 
     <span class="ruby-identifier">flush_expired!</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- flush_expired-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- flush_expired-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- flush_expired-method -->
+
+    
+      <div id="method-i-flush_expired-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">flush_expired!</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>flash expired caches, ingoring when garbage collection was last run</p>
           
 
           
-        </div><!-- flush_expired-method -->
-      
-        <div id="flush_expired-21-method" class="method-detail ">
-          <a name="method-i-flush_expired-21"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">flush_expired!</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>flash expired caches, ingoring when garbage collection was last run</p>
-            
-
-            
-            <div class="method-source-code" id="flush_expired-21-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 69</span>
+          <div class="method-source-code" id="flush_expired-21-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_expired!</span>
   <span class="ruby-constant">Dir</span>[ <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>( <span class="ruby-identifier">store</span>, <span class="ruby-string">&quot;*.cache&quot;</span> ) ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> 
     <span class="ruby-keyword">if</span> (<span class="ruby-constant">File</span>.<span class="ruby-identifier">mtime</span>(<span class="ruby-identifier">f</span>)<span class="ruby-operator">+</span><span class="ruby-identifier">timeout</span>) <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
@@ -619,45 +538,40 @@ href="Diskcached.html#attribute-i-store">store</a> directory</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@gc_last</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- flush_expired-21-source -->
-            
-          </div>
-
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- flush_expired-21-source -->
           
+        </div>
 
-          
-        </div><!-- flush_expired-21-method -->
-      
-        <div id="get-method" class="method-detail ">
-          <a name="method-i-get"></a>
+        
 
-          
-          <div class="method-heading">
-            <span class="method-name">get</span><span
-              class="method-args">(key)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
+        
+      </div><!-- flush_expired-21-method -->
 
-          <div class="method-description">
-            
-            <p>get cache with 'key'</p>
+    
+      <div id="method-i-get" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get cache with 'key'</p>
 <ul><li>
 <p>reads cache if it exists and isn't expired  or raises Diskcache::NotFound</p>
 </li><li>
 <p>if 'key' is an Array returns only keys  which exist and aren't expired, it
 raises Diskcache::NotFound if none are available</p>
 </li></ul>
-            
+          
 
-            
-            <div class="method-source-code" id="get-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 116</span>
+          
+          <div class="method-source-code" id="get-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get</span> <span class="ruby-identifier">key</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
@@ -675,72 +589,66 @@ raises Diskcache::NotFound if none are available</p>
   <span class="ruby-keyword">rescue</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">Diskcached</span><span class="ruby-operator">::</span><span class="ruby-constant">NotFound</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- get-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- get-method -->
+
+    
+      <div id="method-i-replace" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">replace</span><span
+            class="method-args">(key, value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
           
 
           
-        </div><!-- get-method -->
-      
-        <div id="replace-method" class="method-detail method-alias">
-          <a name="method-i-replace"></a>
+        </div>
 
-          
-          <div class="method-heading">
-            <span class="method-name">replace</span><span
-              class="method-args">(key, value)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
+        
 
-          <div class="method-description">
-            
-            
-            
+        
+        <div class="aliases">
+          Alias for: <a href="Diskcached.html#method-i-set">set</a>
+        </div>
+        
+      </div><!-- replace-method -->
 
-            
-          </div>
+    
+      <div id="method-i-set" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set</span><span
+            class="method-args">(key, value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
+        <div class="method-description">
           
-
-          
-          <div class="aliases">
-            Alias for: <a href="Diskcached.html#method-i-set">set</a>
-          </div>
-          
-        </div><!-- replace-method -->
-      
-        <div id="set-method" class="method-detail ">
-          <a name="method-i-set"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">set</span><span
-              class="method-args">(key, value)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>set cache with 'key'</p>
+          <p>set cache with 'key'</p>
 <ul><li>
 <p>run auto_garbage_collect</p>
 </li><li>
 <p>creates cache if it doesn't exist</p>
 </li></ul>
-            
+          
 
-            
-            <div class="method-source-code" id="set-source">
-              <pre>
-              <code class='cpp'> <!-- How can we tell the language? Can we grab the file extension of the parsed source file? --> 
-               <span class="ruby-comment"># File lib/diskcached.rb, line 97</span>
+          
+          <div class="method-source-code" id="set-source">
+            <pre><span class="ruby-comment"># File lib/diskcached.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">write_cache_file</span>( <span class="ruby-identifier">key</span>, <span class="ruby-constant">Marshal</span><span class="ruby-operator">::</span><span class="ruby-identifier">dump</span>(<span class="ruby-identifier">value</span>) )
@@ -750,35 +658,31 @@ raises Diskcache::NotFound if none are available</p>
     <span class="ruby-identifier">flush_expired</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc_auto</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span>
-             </code>
-            </pre> 
-            </div><!-- set-source -->
-            
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- set-source -->
+          
+        </div>
 
-          
-          <div class="aliases">
-            Also aliased as: <a href="Diskcached.html#method-i-add">add</a>, <a href="Diskcached.html#method-i-replace">replace</a>
-          </div>
-          
+        
+        <div class="aliases">
+          Also aliased as: <a href="Diskcached.html#method-i-add">add</a>, <a href="Diskcached.html#method-i-replace">replace</a>
+        </div>
+        
 
-          
-        </div><!-- set-method -->
-      
-      </div><!-- public-instance-method-details -->
+        
+      </div><!-- set-method -->
+
     
-    </div><!-- 5Buntitled-5D -->
+    </section><!-- public-instance-method-details -->
   
-   
-  </div><!-- documentation -->
-  <div id='dynamic'></div>
-  
-<div class='grids wrapper' id="footer">
-  
-      <p><small>Generated with the <a href="http://neurogami.com/code/">Ruby-doc Rdoc Generator</a> 0.10.0</small>.</p>
-  </div>
-</div>
- 
-</body>
-</html>
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
