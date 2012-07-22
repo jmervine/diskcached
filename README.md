@@ -1,3 +1,3 @@
 # Diskcached
 
-## [See the Wiki](https://github.com/jmervine/diskcached/wiki)
+## [See the Wiki](https://github.com/rubyops/diskcached/wiki)
