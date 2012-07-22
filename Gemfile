@@ -16,7 +16,6 @@ end
 
 group :test do
   gem 'rspec'
-  gem 'rdoc-rubydoc', :git => 'git@github.com:rubyops/rdoc-rubydoc.git'
   gem 'simplecov', :require => false
 end
 
