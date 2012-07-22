@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:rubyops/rdoc-rubydoc.git
-  revision: 3e216dd78f8d1c615cbdca7c4949ccc5c0f28466
+  revision: 2f5c16f8302e1eafaa870aeae29f6872c574a3e5
   specs:
     rdoc-rubydoc (0.0.1)
 
@@ -9,19 +9,19 @@ GEM
   specs:
     diff-lcs (1.1.3)
     json (1.7.3)
-    memcached (1.4.2)
+    memcached (1.4.3)
     multi_json (1.3.6)
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    rspec (2.10.0)
-      rspec-core (~> 2.10.0)
-      rspec-expectations (~> 2.10.0)
-      rspec-mocks (~> 2.10.0)
-    rspec-core (2.10.1)
-    rspec-expectations (2.10.0)
+    rspec (2.11.0)
+      rspec-core (~> 2.11.0)
+      rspec-expectations (~> 2.11.0)
+      rspec-mocks (~> 2.11.0)
+    rspec-core (2.11.1)
+    rspec-expectations (2.11.1)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.10.1)
+    rspec-mocks (2.11.1)
     simplecov (0.6.4)
       multi_json (~> 1.0)
       simplecov-html (~> 0.5.3)
