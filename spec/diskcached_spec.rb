@@ -4,30 +4,30 @@ require 'spec_helper.rb'
 describe Diskcached do
   describe '#new' do
     it "should init" do
-      expect { @cache = Diskcached.new }.should_not raise_error
+      expect { @cache = Diskcached.new }.to_not raise_error
     end
     it "should init with 'store'" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache') }.should_not raise_error
+      expect { @cache = Diskcached.new('/tmp/rspec/cache') }.to_not raise_error
       @cache.store.should eq '/tmp/rspec/cache'
     end
     it "should init with 'store' and 'timeout'" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', 10) }.should_not raise_error
+      expect { @cache = Diskcached.new('/tmp/rspec/cache', 10) }.to_not raise_error
       @cache.timeout.should eq 10
     end
     it "should init with 'store', 'timeout' and 'gc_auto'" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', 10, false) }.should_not raise_error
+      expect { @cache = Diskcached.new('/tmp/rspec/cache', 10, false) }.to_not raise_error
       @cache.gc_auto.should be_false
     end
     it "should set 'gc_time' to nil if 'timeout' is nil" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.should_not raise_error
+      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.to_not raise_error
       @cache.gc_time.should be_nil
     end
     it "should set 'gc_last' to nil if 'timeout' is nil" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.should_not raise_error
+      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.to_not raise_error
       @cache.gc_last.should be_nil
     end
     it "should set 'gc_auto' to false if 'timeout' is nil" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.should_not raise_error
+      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.to_not raise_error
       @cache.gc_auto.should be_false
     end
     it "should create cache dir if it doesn't exist" do
@@ -57,7 +57,7 @@ describe Diskcached do
     end
     it "should expire correctly" do
       sleep 0.51
-      expect { @cache.get('test1') }.should raise_error /Diskcached::NotFound/
+      expect { @cache.get('test1') }.to raise_error /Diskcached::NotFound/
     end
   end
 
@@ -74,7 +74,7 @@ describe Diskcached do
     end
     it "should expire correctly" do
       sleep 0.51
-      expect { @cache.get(['test1', 'test2']) }.should raise_error /Diskcached::NotFound/
+      expect { @cache.get(['test1', 'test2']) }.to raise_error /Diskcached::NotFound/
     end
   end
 
@@ -128,7 +128,7 @@ describe Diskcached do
     end
     it "should expire cache" do
       @cache.expired?('test3').should be_false
-      expect { @cache.delete('test3') }.should_not raise_error
+      expect { @cache.delete('test3') }.to_not raise_error
       @cache.expired?('test3').should be_true
     end
     it "should remove cache file" do
@@ -147,7 +147,7 @@ describe Diskcached do
       @cache.expired?('test4').should be_false
       @cache.expired?('test5').should be_false
       @cache.expired?('test6').should be_false
-      expect { @cache.flush }.should_not raise_error
+      expect { @cache.flush }.to_not raise_error
       @cache.expired?('test4').should be_true
       @cache.expired?('test5').should be_true
       @cache.expired?('test6').should be_true
@@ -164,19 +164,19 @@ describe Diskcached do
     end
     it "should not flush caches that aren't expired" do
       @cache.expired?('flush1').should be_false
-      expect { @cache.flush_expired }.should_not raise_error
+      expect { @cache.flush_expired }.to_not raise_error
       @cache.expired?('flush1').should be_false
     end
     it "should not flush caches if caches recently flushed" do
       sleep 0.5
       @cache.expired?('flush1').should be_true
       @cache.instance_variable_set(:@gc_last, Time.now)
-      expect { @cache.flush_expired }.should_not raise_error
+      expect { @cache.flush_expired }.to_not raise_error
       File.exists?('/tmp/rspec/cache/flush1.cache').should be_true
     end
     it "should flush caches are are expired" do
       sleep 0.5
-      expect { @cache.flush_expired }.should_not raise_error
+      expect { @cache.flush_expired }.to_not raise_error
       @cache.expired?('flush1').should be_true
       File.exists?('/tmp/rspec/cache/flush1.cache').should be_false
     end
@@ -189,14 +189,14 @@ describe Diskcached do
     end
     it "should not flush caches that aren't expired" do
       @cache.expired?('flush1').should be_false
-      expect { @cache.flush_expired! }.should_not raise_error
+      expect { @cache.flush_expired! }.to_not raise_error
       @cache.expired?('flush1').should be_false
     end
     it "should flush caches even when recently flushed" do
       sleep 0.5
       @cache.expired?('flush1').should be_true
       @cache.instance_variable_set(:@gc_last, Time.now)
-      expect { @cache.flush_expired! }.should_not raise_error
+      expect { @cache.flush_expired! }.to_not raise_error
       File.exists?('/tmp/rspec/cache/flush1.cache').should be_false
     end
   end
@@ -219,7 +219,7 @@ describe Diskcached do
     end
     it "should clean up expired caches" do
       sleep 0.51
-      expect { @cache.cache('test10') { "cache test10" } }.should_not raise_error
+      expect { @cache.cache('test10') { "cache test10" } }.to_not raise_error
       sleep 0.1
       File.exists?(@cache.cache_file('test8')).should be_false
       File.exists?(@cache.cache_file('test9')).should be_false
@@ -236,7 +236,7 @@ describe Diskcached do
     end
     it "should not clean up expired caches" do
       sleep 0.51
-      expect { @cache.cache('test10') { "cache test10" } }.should_not raise_error
+      expect { @cache.cache('test10') { "cache test10" } }.to_not raise_error
       sleep 0.1
       File.exists?(@cache.cache_file('test8')).should be_true
       File.exists?(@cache.cache_file('test9')).should be_true
