@@ -4,3 +4,5 @@ vendor/bundle
 pkg
 *.gem
 .yardoc
+doc
+coverage
