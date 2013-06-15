@@ -165,7 +165,7 @@ class Diskcached
 
   # creates #store directory if it doesn't exist
   def ensure_store_directory
-    Dir.mkdir( store ) unless File.directory?( store )
+    FileUtils.mkpath( store ) unless File.directory?( store )
   end
 
   class NotFound < Exception
