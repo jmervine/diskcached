@@ -114,22 +114,18 @@ class Diskcached
   #   which exist and aren't expired, it raises
   #   Diskcache::NotFound if none are available
   def get key
-    begin
-      if key.is_a? Array
-        hash = {}
-        key.each do |k|
-          hash[k] = Marshal::load(read_cache_file(k)) unless expired?(k)
-        end
-        flush_expired if gc_auto
-        return hash unless hash.empty?
-      else
-        flush_expired if gc_auto
-        return Marshal::load(read_cache_file(key)) unless expired?(key)
+    if key.is_a? Array
+      hash = {}
+      key.each do |k|
+        hash[k] = Marshal::load(read_cache_file(k)) unless expired?(k)
       end
-      raise Diskcached::NotFound
-    rescue
-      raise Diskcached::NotFound
+      flush_expired if gc_auto
+      return hash unless hash.empty?
+    else
+      flush_expired if gc_auto
+      return Marshal::load(read_cache_file(key)) unless expired?(key)
     end
+    raise Diskcached::NotFound
   end
 
   # returns path to cache file with 'key'

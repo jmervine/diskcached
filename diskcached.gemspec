@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "rdoc"
+  s.add_development_dependency "timecop"
  
   s.files        = Dir.glob("lib/**/*") + %w(README.md HISTORY.md Benchmark.md Gemfile Rakefile)
   s.require_path = 'lib'
