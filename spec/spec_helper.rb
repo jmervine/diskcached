@@ -2,9 +2,13 @@ require 'simplecov'
 SimpleCov.start do
     add_filter "/vendor/"
 end
+
+require 'tmpdir'
 require 'rspec'
 require 'fileutils'
 require './lib/diskcached'
+
+$cachedir = File.join(Dir.tmpdir, 'rspec')
 
 # create things to cache and test
 class TestObject
@@ -25,7 +29,7 @@ class TestObject
     }
   end
   def obj
-    TestSubObject.new 
+    TestSubObject.new
   end
 end
 class TestSubObject
@@ -37,10 +41,9 @@ class TestSubObject
 end
 
 # delete old rspec test directories
-if File.directory?('/tmp/rspec')
-  FileUtils.rm_rf('/tmp/rspec') 
+if File.directory?($cachedir)
+  FileUtils.rm_rf($cachedir)
 end
 
 # create new rspec test directory
-Dir.mkdir('/tmp/rspec')
-
+Dir.mkdir($cachedir)

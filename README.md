@@ -2,7 +2,7 @@
 
 > Simple disk cache for things like Sinatra which is implemented much like Memcached in hopes that in some cases they're interchangeable.
 
-### [Documentation](http://rubyops.github.com/diskcached/doc/Diskcached.html) | [Coverage](http://rubyops.github.com/diskcached/coverage/index.html#_AllFiles) | [Benchmarks](https://github.com/rubyops/diskcached/wiki/Benchmark-Output)
+### [Documentation](http://jmervine.github.com/diskcached/doc/Diskcached.html) | [Coverage](http://jmervine.github.com/diskcached/coverage/index.html#_AllFiles) | [Benchmarks](https://github.com/jmervine/diskcached/wiki/Benchmark-Output)
 
 ## Introduction
 
@@ -71,7 +71,7 @@ Diskcached wasn't designed to be a faster solution, just a simpler
 one when compaired to Memcached. However, from these benchmarks,
 it holds up will and even should provide slightly faster reads.
 
-##### [Moved to 'Benchmark Output'](https://github.com/rubyops/diskcached/wiki/Benchmark-Output)
+##### [Moved to 'Benchmark Output'](https://github.com/jmervine/diskcached/wiki/Benchmark-Output)
 
 ## Sinatra Application 'httperf' results.
 

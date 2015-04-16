@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 group :development, :test do
   gem 'rake'
@@ -19,5 +19,3 @@ group :test do
   gem 'rspec'
   gem 'simplecov', :require => false
 end
-
-

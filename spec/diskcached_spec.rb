@@ -1,69 +1,64 @@
 require 'spec_helper.rb'
 
-
 describe Diskcached do
   describe '#new' do
     it "should init" do
-      expect { @cache = Diskcached.new }.to_not raise_error
+      expect { Diskcached.new }.to_not raise_error
     end
     it "should init with 'store'" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache') }.to_not raise_error
-      @cache.store.should eq '/tmp/rspec/cache'
+      expect { @cache = Diskcached.new($cachedir) }.to_not raise_error
+      @cache.store.should eq $cachedir
     end
     it "should init with 'store' and 'timeout'" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', 10) }.to_not raise_error
+      expect { @cache = Diskcached.new($cachedir, 10) }.to_not raise_error
       @cache.timeout.should eq 10
     end
     it "should init with 'store', 'timeout' and 'gc_auto'" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', 10, false) }.to_not raise_error
+      expect { @cache = Diskcached.new($cachedir, 10, false) }.to_not raise_error
       @cache.gc_auto.should be_false
     end
     it "should set 'gc_time' to nil if 'timeout' is nil" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.to_not raise_error
+      expect { @cache = Diskcached.new($cachedir, nil) }.to_not raise_error
       @cache.gc_time.should be_nil
     end
     it "should set 'gc_last' to nil if 'timeout' is nil" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.to_not raise_error
+      expect { @cache = Diskcached.new($cachedir, nil) }.to_not raise_error
       @cache.gc_last.should be_nil
     end
-    it "should set 'gc_auto' to false if 'timeout' is nil" do
-      expect { @cache = Diskcached.new('/tmp/rspec/cache', nil) }.to_not raise_error
-      @cache.gc_auto.should be_false
-    end
     it "should create cache dir if it doesn't exist" do
-      File.directory?('/tmp/rspec/cache').should be_true
+      File.directory?($cachedir).should be_true
     end
   end
 
   describe "#set", "(alias #add, #replace)" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache")
+      @cache = Diskcached.new($cachedir)
     end
     it "should create a new cache" do
       @cache.set('test1', "test string").should be_true
     end
     it "should create a file on disk" do
-      File.exists?("/tmp/rspec/cache/test1.cache").should be_true
+      File.exists?(File.join($cachedir, "test1.cache")).should be_true
     end
   end
 
   describe "#get", "single" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache = Diskcached.new($cachedir, 1)
     end
     it "should read cache before expiration" do
       @cache.get('test1').should eq "test string"
       @cache.get('test1').should be_a_kind_of String
     end
     it "should expire correctly" do
-      sleep 0.51
+      sleep 2
       expect { @cache.get('test1') }.to raise_error /Diskcached::NotFound/
     end
   end
 
   describe "#get", "multiple" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache = Diskcached.new($cachedir, 1)
       @cache.set('test1', "test string")
       @cache.set('test2', "test string")
     end
@@ -73,57 +68,57 @@ describe Diskcached do
       @cache.get(['test1', 'test2'])['test1'].should eq "test string"
     end
     it "should expire correctly" do
-      sleep 0.51
+      sleep 2
       expect { @cache.get(['test1', 'test2']) }.to raise_error /Diskcached::NotFound/
     end
   end
 
   describe "#cache" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache = Diskcached.new($cachedir, 1)
     end
     it "should create a new cache" do
       @cache.cache('test1') do
         "test string"
       end.should eq "test string"
-      File.exists?("/tmp/rspec/cache/test1.cache").should be_true
+      File.exists?(File.join($cachedir, "test1.cache")).should be_true
     end
     it "should create a file on disk" do
-      File.exists?("/tmp/rspec/cache/test1.cache").should be_true
+      File.exists?(File.join($cachedir, "test1.cache")).should be_true
     end
     it "should read cache before expiration" do
       @cache.cache('test1').should eq "test string"
       @cache.cache('test1').should be_a_kind_of String
     end
     it "should expire correctly" do
-      sleep 0.51
+      sleep 2
       @cache.cache('test1') do
         "new test string"
       end.should eq "new test string"
     end
     it "should return nil if no block is passed and cache is expired" do
-      sleep 0.51 
+      sleep 2
       @cache.cache('test1').should be_nil
     end
   end
 
   describe "#expired?" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.1)
+      @cache = Diskcached.new($cachedir, 1)
       @cache.cache('test2') { "cache test2" }
     end
     it "should be false" do
       @cache.expired?('test2').should be_false
     end
     it "should be true" do
-      sleep 0.11
+      sleep 2
       @cache.expired?('test2').should be_true
     end
   end
-  
+
   describe "#delete" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache")
+      @cache = Diskcached.new($cachedir)
       @cache.cache('test3') { "cache test3" }
     end
     it "should expire cache" do
@@ -132,13 +127,13 @@ describe Diskcached do
       @cache.expired?('test3').should be_true
     end
     it "should remove cache file" do
-      File.exists?("/tmp/rspec/cache/test3.cache").should be_false
+      File.exists?(File.join($cachedir, "test3.cache")).should be_false
     end
   end
 
   describe "#flush" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache")
+      @cache = Diskcached.new($cachedir)
       @cache.cache('test4') { "cache test4" }
       @cache.cache('test5') { "cache test5" }
       @cache.cache('test6') { "cache test6" }
@@ -153,13 +148,13 @@ describe Diskcached do
       @cache.expired?('test6').should be_true
     end
     it "should remove all cache files" do
-      Dir['/tmp/rspec/cache/*.cache'].should be_empty
+      Dir[File.join($cachedir, '*.cache')].should be_empty
     end
   end
 
   describe "#flush_expired" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache = Diskcached.new($cachedir, 1)
       @cache.cache('flush1') { "cache flush" }
     end
     it "should not flush caches that aren't expired" do
@@ -168,23 +163,23 @@ describe Diskcached do
       @cache.expired?('flush1').should be_false
     end
     it "should not flush caches if caches recently flushed" do
-      sleep 0.5
+      sleep 2
       @cache.expired?('flush1').should be_true
       @cache.instance_variable_set(:@gc_last, Time.now)
       expect { @cache.flush_expired }.to_not raise_error
-      File.exists?('/tmp/rspec/cache/flush1.cache').should be_true
+      File.exists?(File.join($cachedir, "flush1.cache")).should be_true
     end
     it "should flush caches are are expired" do
-      sleep 0.5
+      sleep 2
       expect { @cache.flush_expired }.to_not raise_error
       @cache.expired?('flush1').should be_true
-      File.exists?('/tmp/rspec/cache/flush1.cache').should be_false
+      File.exists?(File.join($cachedir, "flush1.cache")).should_not be_true
     end
   end
 
   describe "#flush_expired!" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache = Diskcached.new($cachedir, 1)
       @cache.cache('flush1') { "cache flush" }
     end
     it "should not flush caches that aren't expired" do
@@ -193,34 +188,34 @@ describe Diskcached do
       @cache.expired?('flush1').should be_false
     end
     it "should flush caches even when recently flushed" do
-      sleep 0.5
+      sleep 2
       @cache.expired?('flush1').should be_true
       @cache.instance_variable_set(:@gc_last, Time.now)
       expect { @cache.flush_expired! }.to_not raise_error
-      File.exists?('/tmp/rspec/cache/flush1.cache').should be_false
+      File.exists?(File.join($cachedir, "flush1.cache")).should_not be_true
     end
   end
 
   describe "#cache_file" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache")
+      @cache = Diskcached.new($cachedir)
     end
     it "should build cache path" do
-      @cache.cache_file("test7").should eq "/tmp/rspec/cache/test7.cache"
+      @cache.cache_file("test7").should eq File.join($cachedir, "test7.cache")
     end
   end
 
   describe "automatic garbage collection ON" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5)
+      @cache = Diskcached.new($cachedir, 1)
       @cache.cache('test8') { "cache test8" }
       @cache.cache('test9') { "cache test9" }
       @cache.cache('test10') { "cache test10" }
     end
     it "should clean up expired caches" do
-      sleep 0.51
+      sleep 2
       expect { @cache.cache('test10') { "cache test10" } }.to_not raise_error
-      sleep 0.1
+      sleep 1
       File.exists?(@cache.cache_file('test8')).should be_false
       File.exists?(@cache.cache_file('test9')).should be_false
       File.exists?(@cache.cache_file('test10')).should be_true
@@ -229,15 +224,15 @@ describe Diskcached do
 
   describe "automatic garbage collection OFF" do
     before(:all) do
-      @cache = Diskcached.new("/tmp/rspec/cache", 0.5, false)
+      @cache = Diskcached.new($cachedir, 1, false)
       @cache.cache('test8') { "cache test8" }
       @cache.cache('test9') { "cache test9" }
       @cache.cache('test10') { "cache test10" }
     end
     it "should not clean up expired caches" do
-      sleep 0.51
+      sleep 2
       expect { @cache.cache('test10') { "cache test10" } }.to_not raise_error
-      sleep 0.1
+      sleep 1
       File.exists?(@cache.cache_file('test8')).should be_true
       File.exists?(@cache.cache_file('test9')).should be_true
       File.exists?(@cache.cache_file('test10')).should be_true
@@ -248,7 +243,7 @@ end
 
 describe Diskcached, "advanced test cases" do
   before(:all) do
-    @cache = Diskcached.new('/tmp/rspec/cache')
+    @cache = Diskcached.new($cachedir)
     @testo = TestObject.new
   end
 
@@ -303,14 +298,14 @@ describe Diskcached, "advanced test cases" do
   end
   it "should cache modified objects" do
     @cache.delete('object')
-    @cache.cache('object') do 
+    @cache.cache('object') do
       o = @testo.obj
       o.sub_bar = 'bar'
       o
     end
     @cache.cache('object').should be_a_kind_of TestSubObject
     @cache.cache('object').sub_bar.should eq 'bar'
-  end 
+  end
   it "should cache complex objects" do
     # might be redundant, but tests more complexity
     @cache.delete('object')
