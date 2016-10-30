@@ -120,7 +120,7 @@ class Diskcached
   #   or raises Diskcache::NotFound
   # - if 'key' is an Array returns only keys
   #   which exist and aren't expired, it raises
-  #   Diskcache::NotFound if none are available
+  #   Diskcached::NotFound if none are available
   def get key
     if key.is_a? Array
       ret = {}
@@ -177,7 +177,7 @@ class Diskcached
     FileUtils.mkpath( store ) unless File.directory?( store )
   end
 
-  class NotFound < Exception
+  class NotFound < StandardError
   end
 
 end
