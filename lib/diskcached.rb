@@ -1,7 +1,7 @@
 # @author Joshua P. Mervine <joshua@mervine.net>
 class Diskcached
   # version for gem
-  VERSION = '1.1.2'
+  VERSION = '1.1.3'
 
   # disk location for cache store
   attr_reader :store
