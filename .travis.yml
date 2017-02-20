@@ -2,8 +2,6 @@ language: ruby
 bundler_args: --without development benchmark
 script: bundle exec rspec -c -fd
 rvm:
-  - 1.9.3
   - 2.0.0
   - 2.2.1
-#  - ruby-head
-
+  - 2.3.1

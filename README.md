@@ -6,7 +6,7 @@
 
 ## Introduction
 
-I created Diskcached as a simple cacheing layer for things like html fragments and database calls. I thought about using [memcached](http://memcached.org/), but as the app I was working on was running on a single server, it seemed overkill. Additionally, I looked at using [rack-cache](http://rtomayko.github.com/rack-cache/), but I felt it was a bit more complex then I was looking for. So Diskcached was born (although it was origiionally released as "simple\_disk\_cache" -- for about 12 hours).
+I created Diskcached as a simple cacheing layer for things like html fragments and database calls. I thought about using [memcached](http://memcached.org/), but as the app I was working on was running on a single server, it seemed overkill. Additionally, I looked at using [rack-cache](http://rtomayko.github.com/rack-cache/), but I felt it was a bit more complex then I was looking for. So Diskcached was born (although it was originally released as "simple\_disk\_cache" -- for about 12 hours).
 
 * To the comment: "I'm not clear how memcached on a single server is overkill."
 >  1. In some cases -- e.g. Dreamhost shared hosting and Heroku (I believe) -- it is difficult, if not impossible to install memcached. This is for those situations.
@@ -40,7 +40,7 @@ Or with [Bundler](http://mervine.net/tag/bundler):
 
     puts result
 
-The above will create the cache if it doesn't exist and cache the result of block and return it. If the cache exists and isn't expired, it will read from the cache and returnwhat's stored. This allows you to passively wrap code in a cache block and not worry about checking to see if it's valid or expired.
+The above will create the cache if it doesn't exist and cache the result of block and return it. If the cache exists and isn't expired, it will read from the cache and return what's stored. This allows you to passively wrap code in a cache block and not worry about checking to see if it's valid or expired.
 
 Also worth noting, it will return `nil` if something goes wrong.
 
@@ -61,14 +61,14 @@ Using Diskcached like this should allow for a "drag and drop" replacement of Mem
 
     puts result
 
-It's important to note that Diskcached is quite a bit simpler then Memcached and in some ways more forgiving. If Memcached compatability is really important, refer to Memcached docs as well as Diskcached docs when implementing your code.
+It's important to note that Diskcached is quite a bit simpler then Memcached and in some ways more forgiving. If Memcached compatibility is really important, refer to Memcached docs as well as Diskcached docs when implementing your code.
 
 ## Benchmarks
 
 ### Comments
 
 Diskcached wasn't designed to be a faster solution, just a simpler
-one when compaired to Memcached. However, from these benchmarks,
+one when compared to Memcached. However, from these benchmarks,
 it holds up will and even should provide slightly faster reads.
 
 ##### [Moved to 'Benchmark Output'](https://github.com/jmervine/diskcached/wiki/Benchmark-Output)
@@ -134,4 +134,3 @@ Using the endpoint [http://mervine.net/](http://mervine.net/) on my dev server a
 
     Errors: total 0 client-timo 0 socket-timo 0 connrefused 0 connreset 0
     Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
-

@@ -7,26 +7,26 @@ describe Diskcached do
     end
     it "should init with 'store'" do
       expect { @cache = Diskcached.new($cachedir) }.to_not raise_error
-      @cache.store.should eq $cachedir
+      expect(@cache.store).to eq($cachedir)
     end
     it "should init with 'store' and 'timeout'" do
       expect { @cache = Diskcached.new($cachedir, 10) }.to_not raise_error
-      @cache.timeout.should eq 10
+      expect(@cache.timeout).to eq(10)
     end
     it "should init with 'store', 'timeout' and 'gc_auto'" do
       expect { @cache = Diskcached.new($cachedir, 10, false) }.to_not raise_error
-      @cache.gc_auto.should be_false
+      expect(@cache.gc_auto).to be_falsey
     end
     it "should set 'gc_time' to nil if 'timeout' is nil" do
       expect { @cache = Diskcached.new($cachedir, nil) }.to_not raise_error
-      @cache.gc_time.should be_nil
+      expect(@cache.gc_time).to be_nil
     end
     it "should set 'gc_last' to nil if 'timeout' is nil" do
       expect { @cache = Diskcached.new($cachedir, nil) }.to_not raise_error
-      @cache.gc_last.should be_nil
+      expect(@cache.gc_last).to be_nil
     end
     it "should create cache dir if it doesn't exist" do
-      File.directory?($cachedir).should be_true
+      expect(File.directory?($cachedir)).to be_truthy
     end
   end
 
@@ -35,10 +35,10 @@ describe Diskcached do
       @cache = Diskcached.new($cachedir)
     end
     it "should create a new cache" do
-      @cache.set('test1', "test string").should be_true
+      expect(@cache.set('test1', "test string")).to be_truthy
     end
     it "should create a file on disk" do
-      File.exists?(File.join($cachedir, "test1.cache")).should be_true
+      expect(File.exists?(File.join($cachedir, "test1.cache"))).to be_truthy
     end
   end
 
@@ -47,8 +47,8 @@ describe Diskcached do
       @cache = Diskcached.new($cachedir, 1)
     end
     it "should read cache before expiration" do
-      @cache.get('test1').should eq "test string"
-      @cache.get('test1').should be_a_kind_of String
+      expect(@cache.get('test1')).to eq "test string"
+      expect(@cache.get('test1')).to be_a_kind_of String
     end
     it "should expire correctly" do
       sleep 2
@@ -63,9 +63,9 @@ describe Diskcached do
       @cache.set('test2', "test string")
     end
     it "should read multiple caches into a Hash" do
-      @cache.get(['test1', 'test2']).should be_a_kind_of Hash
-      @cache.get(['test1', 'test2']).keys.count.should eq 2
-      @cache.get(['test1', 'test2'])['test1'].should eq "test string"
+      expect(@cache.get(['test1', 'test2'])).to be_a_kind_of Hash
+      expect(@cache.get(['test1', 'test2']).keys.count).to eq 2
+      expect(@cache.get(['test1', 'test2'])['test1']).to eq "test string"
     end
     it "should expire correctly" do
       sleep 2
@@ -78,27 +78,28 @@ describe Diskcached do
       @cache = Diskcached.new($cachedir, 1)
     end
     it "should create a new cache" do
-      @cache.cache('test1') do
+      expect(@cache.cache('test1') do
         "test string"
-      end.should eq "test string"
-      File.exists?(File.join($cachedir, "test1.cache")).should be_true
+      end).to eq "test string"
+      expect(File.exists?(File.join($cachedir, "test1.cache"))).to be_truthy
     end
     it "should create a file on disk" do
-      File.exists?(File.join($cachedir, "test1.cache")).should be_true
+      expect(File.exists?(File.join($cachedir, "test1.cache"))).to be_truthy
     end
     it "should read cache before expiration" do
-      @cache.cache('test1').should eq "test string"
-      @cache.cache('test1').should be_a_kind_of String
+      expect(@cache.cache('test1')).to eq "test string"
+      expect(@cache.cache('test1')).to be_a_kind_of String
     end
     it "should expire correctly" do
       sleep 2
-      @cache.cache('test1') do
-        "new test string"
-      end.should eq "new test string"
+      expect(
+        @cache.cache('test1') do
+          "new test string"
+        end).to eq "new test string"
     end
     it "should return nil if no block is passed and cache is expired" do
       sleep 2
-      @cache.cache('test1').should be_nil
+      expect(@cache.cache('test1')).to be_nil
     end
   end
 
@@ -108,11 +109,11 @@ describe Diskcached do
       @cache.cache('test2') { "cache test2" }
     end
     it "should be false" do
-      @cache.expired?('test2').should be_false
+      expect(@cache.expired?('test2')).to be_falsey
     end
     it "should be true" do
       sleep 2
-      @cache.expired?('test2').should be_true
+      expect(@cache.expired?('test2')).to be_truthy
     end
   end
 
@@ -122,12 +123,12 @@ describe Diskcached do
       @cache.cache('test3') { "cache test3" }
     end
     it "should expire cache" do
-      @cache.expired?('test3').should be_false
+      expect(@cache.expired?('test3')).to be_falsey
       expect { @cache.delete('test3') }.to_not raise_error
-      @cache.expired?('test3').should be_true
+      expect(@cache.expired?('test3')).to be_truthy
     end
     it "should remove cache file" do
-      File.exists?(File.join($cachedir, "test3.cache")).should be_false
+      expect(File.exists?(File.join($cachedir, "test3.cache"))).to be_falsey
     end
   end
 
@@ -139,16 +140,16 @@ describe Diskcached do
       @cache.cache('test6') { "cache test6" }
     end
     it "should expire all caches" do
-      @cache.expired?('test4').should be_false
-      @cache.expired?('test5').should be_false
-      @cache.expired?('test6').should be_false
+      expect(@cache.expired?('test4')).to be_falsey
+      expect(@cache.expired?('test5')).to be_falsey
+      expect(@cache.expired?('test6')).to be_falsey
       expect { @cache.flush }.to_not raise_error
-      @cache.expired?('test4').should be_true
-      @cache.expired?('test5').should be_true
-      @cache.expired?('test6').should be_true
+      expect(@cache.expired?('test4')).to be_truthy
+      expect(@cache.expired?('test5')).to be_truthy
+      expect(@cache.expired?('test6')).to be_truthy
     end
     it "should remove all cache files" do
-      Dir[File.join($cachedir, '*.cache')].should be_empty
+      expect(Dir[File.join($cachedir, '*.cache')]).to be_empty
     end
   end
 
@@ -158,22 +159,22 @@ describe Diskcached do
       @cache.cache('flush1') { "cache flush" }
     end
     it "should not flush caches that aren't expired" do
-      @cache.expired?('flush1').should be_false
+      expect(@cache.expired?('flush1')).to be_falsey
       expect { @cache.flush_expired }.to_not raise_error
-      @cache.expired?('flush1').should be_false
+      expect(@cache.expired?('flush1')).to be_falsey
     end
     it "should not flush caches if caches recently flushed" do
       sleep 2
-      @cache.expired?('flush1').should be_true
+      expect(@cache.expired?('flush1')).to be_truthy
       @cache.instance_variable_set(:@gc_last, Time.now)
       expect { @cache.flush_expired }.to_not raise_error
-      File.exists?(File.join($cachedir, "flush1.cache")).should be_true
+      expect(File.exists?(File.join($cachedir, "flush1.cache"))).to be_truthy
     end
     it "should flush caches are are expired" do
       sleep 2
       expect { @cache.flush_expired }.to_not raise_error
-      @cache.expired?('flush1').should be_true
-      File.exists?(File.join($cachedir, "flush1.cache")).should_not be_true
+      expect(@cache.expired?('flush1')).to be_truthy
+      expect(File.exists?(File.join($cachedir, "flush1.cache"))).not_to be_truthy
     end
   end
 
@@ -183,16 +184,16 @@ describe Diskcached do
       @cache.cache('flush1') { "cache flush" }
     end
     it "should not flush caches that aren't expired" do
-      @cache.expired?('flush1').should be_false
+      expect(@cache.expired?('flush1')).to be_falsey
       expect { @cache.flush_expired! }.to_not raise_error
-      @cache.expired?('flush1').should be_false
+      expect(@cache.expired?('flush1')).to be_falsey
     end
     it "should flush caches even when recently flushed" do
       sleep 2
-      @cache.expired?('flush1').should be_true
+      expect(@cache.expired?('flush1')).to be_truthy
       @cache.instance_variable_set(:@gc_last, Time.now)
       expect { @cache.flush_expired! }.to_not raise_error
-      File.exists?(File.join($cachedir, "flush1.cache")).should_not be_true
+      expect(File.exists?(File.join($cachedir, "flush1.cache"))).to_not be_truthy
     end
   end
 
@@ -201,7 +202,7 @@ describe Diskcached do
       @cache = Diskcached.new($cachedir)
     end
     it "should build cache path" do
-      @cache.cache_file("test7").should eq File.join($cachedir, "test7.cache")
+      expect(@cache.cache_file("test7")).to eq File.join($cachedir, "test7.cache")
     end
   end
 
@@ -216,9 +217,9 @@ describe Diskcached do
       sleep 2
       expect { @cache.cache('test10') { "cache test10" } }.to_not raise_error
       sleep 1
-      File.exists?(@cache.cache_file('test8')).should be_false
-      File.exists?(@cache.cache_file('test9')).should be_false
-      File.exists?(@cache.cache_file('test10')).should be_true
+      expect(File.exists?(@cache.cache_file('test8'))).to be_falsey
+      expect(File.exists?(@cache.cache_file('test9'))).to be_falsey
+      expect(File.exists?(@cache.cache_file('test10'))).to be_truthy
     end
   end
 
@@ -233,9 +234,9 @@ describe Diskcached do
       sleep 2
       expect { @cache.cache('test10') { "cache test10" } }.to_not raise_error
       sleep 1
-      File.exists?(@cache.cache_file('test8')).should be_true
-      File.exists?(@cache.cache_file('test9')).should be_true
-      File.exists?(@cache.cache_file('test10')).should be_true
+      expect(File.exists?(@cache.cache_file('test8'))).to be_truthy
+      expect(File.exists?(@cache.cache_file('test9'))).to be_truthy
+      expect(File.exists?(@cache.cache_file('test10'))).to be_truthy
     end
   end
 
@@ -249,52 +250,52 @@ describe Diskcached, "advanced test cases" do
 
   it "should cache array" do
     @cache.cache('array') { @testo.array }
-    @cache.cache('array').should be_a_kind_of Array
-    @cache.cache('array').count.should eq 3
+    expect(@cache.cache('array')).to be_a_kind_of Array
+    expect(@cache.cache('array').count).to eq 3
 
     @cache.set('array1', @testo.array)
-    @cache.get('array1').should be_a_kind_of Array
-    @cache.get('array1').count.should eq 3
+    expect(@cache.get('array1')).to be_a_kind_of Array
+    expect(@cache.get('array1').count).to eq 3
   end
 
   it "should cache string" do
     @cache.cache('string') { @testo.string }
-    @cache.cache('string').should be_a_kind_of String
-    @cache.cache('string').should eq "foo bar bah"
+    expect(@cache.cache('string')).to be_a_kind_of String
+    expect(@cache.cache('string')).to eq "foo bar bah"
 
     @cache.set('string1', @testo.string)
-    @cache.get('string1').should be_a_kind_of String
-    @cache.get('string1').should eq "foo bar bah"
+    expect(@cache.get('string1')).to be_a_kind_of String
+    expect(@cache.get('string1')).to eq "foo bar bah"
   end
 
   it "should cache number" do
     @cache.cache('num') { @testo.num }
-    @cache.cache('num').should be_a_kind_of Integer
-    @cache.cache('num').should eq 3
+    expect(@cache.cache('num')).to be_a_kind_of Integer
+    expect(@cache.cache('num')).to eq 3
 
     @cache.set('num1', @testo.num)
-    @cache.get('num1').should be_a_kind_of Integer
-    @cache.get('num1').should eq 3
+    expect(@cache.get('num1')).to be_a_kind_of Integer
+    expect(@cache.get('num1')).to eq 3
   end
 
   it "should cache hash" do
     @cache.cache('hash') { @testo.hash }
-    @cache.cache('hash').should be_a_kind_of Hash
-    @cache.cache('hash').should have_key :foo
+    expect(@cache.cache('hash')).to be_a_kind_of Hash
+    expect(@cache.cache('hash')).to have_key :foo
 
     @cache.set('hash1', @testo.hash)
-    @cache.get('hash1').should be_a_kind_of Hash
-    @cache.get('hash1').should have_key :foo
+    expect(@cache.get('hash1')).to be_a_kind_of Hash
+    expect(@cache.get('hash1')).to have_key :foo
   end
 
   it "should cache simple objects" do
     @cache.cache('object') { @testo.obj }
-    @cache.cache('object').should be_a_kind_of TestSubObject
-    @cache.cache('object').sub_foo.should eq "foo"
+    expect(@cache.cache('object')).to be_a_kind_of TestSubObject
+    expect(@cache.cache('object').sub_foo).to eq "foo"
 
     @cache.set('object1', @testo.obj)
-    @cache.get('object1').should be_a_kind_of TestSubObject
-    @cache.get('object1').sub_foo.should eq "foo"
+    expect(@cache.get('object1')).to be_a_kind_of TestSubObject
+    expect(@cache.get('object1').sub_foo).to eq "foo"
   end
   it "should cache modified objects" do
     @cache.delete('object')
@@ -303,17 +304,17 @@ describe Diskcached, "advanced test cases" do
       o.sub_bar = 'bar'
       o
     end
-    @cache.cache('object').should be_a_kind_of TestSubObject
-    @cache.cache('object').sub_bar.should eq 'bar'
+    expect(@cache.cache('object')).to be_a_kind_of TestSubObject
+    expect(@cache.cache('object').sub_bar).to eq 'bar'
   end
   it "should cache complex objects" do
     # might be redundant, but tests more complexity
     @cache.delete('object')
     @cache.cache('object') { TestObject.new }
-    @cache.cache('object').array.should be_a_kind_of Array
-    @cache.cache('object').string.should be_a_kind_of String
-    @cache.cache('object').hash.should be_a_kind_of Hash
-    @cache.cache('object').obj.should be_a_kind_of TestSubObject
+    expect(@cache.cache('object').array).to be_a_kind_of Array
+    expect(@cache.cache('object').string).to be_a_kind_of String
+    expect(@cache.cache('object').hash).to be_a_kind_of Hash
+    expect(@cache.cache('object').obj).to be_a_kind_of TestSubObject
   end
 
 end

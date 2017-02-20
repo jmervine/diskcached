@@ -1,7 +1,7 @@
 # @author Joshua P. Mervine <joshua@mervine.net>
 class Diskcached
   # version for gem
-  VERSION = '1.1.1'
+  VERSION = '1.1.2'
 
   # disk location for cache store
   attr_reader :store
@@ -21,7 +21,7 @@ class Diskcached
   # initialize object
   # - set #store to passed or default ('/tmp/cache')
   # - set #timeout to passed or default ('600')
-  # - set #gc_last to current time
+  # - set #autogc to passed or default ('false')
   # - run #ensure_store_directory
   def initialize store="/tmp/cache", timeout=600, autogc=true
     @store   = store
