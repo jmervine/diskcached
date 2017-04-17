@@ -45,11 +45,10 @@ class Diskcached
     @gc_time = t
   end
 
-  # return true if cache with 'key' is expired
+  # return true if cache with 'key' is expired or there is no cache entry
   def expired? key
-    return false if timeout.nil?
     mtime = read_cache_mtime(key)
-    return (mtime.nil? || mtime+timeout <= Time.now)
+    return mtime.nil? || (timeout && mtime+timeout <= Time.now)
   end
 
   # expire cache with 'key'
