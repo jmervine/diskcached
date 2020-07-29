@@ -149,7 +149,7 @@ class Diskcached
   private
   # creates the actual cache file
   def write_cache_file key, content
-    f = File.open( cache_file(key), "w+" )
+    f = File.open( cache_file(key), "wb+" )
     f.flock(File::LOCK_EX)
     f.write( content )
     f.close
@@ -158,7 +158,7 @@ class Diskcached
 
   # reads the actual cache file
   def read_cache_file key
-    f = File.open( cache_file(key), "r" )
+    f = File.open( cache_file(key), "rb" )
     f.flock(File::LOCK_SH)
     out = f.read
     f.close
